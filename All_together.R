@@ -4,22 +4,22 @@ library(readxl)
 library(dplyr)
 
 #Read data
-population_tot <- read_csv("population_total.csv")
-murder_total_deaths <- read_csv("murder_total_deaths edited.csv")
-armed_forces_personnel_total <- read_csv("armed_forces_personnel_total.csv")
-cell_phones <- read_csv("cell_phones_per_100_people.csv")
-children_per_woman <- read_csv("children_per_woman_total_fertility.csv")
-life_expectancy_years <- read_csv("life_expectancy_years.csv")
-suicide_total_deaths <- read_csv("suicide_total_deaths.csv")
-urban_population <- read_csv("urban_population.csv")
-sex_ratio <- read_csv("sex_ratio_all_age_groups.csv")
-corruption <- read_csv("corruption_perception_index_cpi.csv")
-internet_users <- read_csv("internet_users.csv")
-internet_users <- read_csv("internet_users.csv")
-child_mortality <- read_csv("child_mortality_0_5_year_olds_dying_per_1000_born.csv")
-income_per_person <- read_csv("income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
-investments_per_ofGDP <- read_csv("investments_percent_of_gdp.csv")
-gini <- read_csv("gini.csv")
+population_tot <- read_csv("data/population_total.csv")
+murder_total_deaths <- read_csv("data/murder_total_deaths edited.csv")
+armed_forces_personnel_total <- read_csv("data/armed_forces_personnel_total.csv")
+cell_phones <- read_csv("data/cell_phones_per_100_people.csv")
+children_per_woman <- read_csv("data/children_per_woman_total_fertility.csv")
+life_expectancy_years <- read_csv("data/life_expectancy_years.csv")
+suicide_total_deaths <- read_csv("data/suicide_total_deaths.csv")
+urban_population <- read_csv("data/urban_population.csv")
+sex_ratio <- read_csv("data/sex_ratio_all_age_groups.csv")
+corruption <- read_csv("data/corruption_perception_index_cpi.csv")
+internet_users <- read_csv("data/internet_users.csv")
+internet_users <- read_csv("data/internet_users.csv")
+child_mortality <- read_csv("data/child_mortality_0_5_year_olds_dying_per_1000_born.csv")
+income_per_person <- read_csv("data/income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
+investments_per_ofGDP <- read_csv("data/investments_percent_of_gdp.csv")
+gini <- read_csv("data/gini.csv")
 
 
 
@@ -164,7 +164,7 @@ summary(a, loadings=T)
 # HEre is a test where I deleted few columns.
 # See how PC increases/descreases while deleting less correlated columns
 ## TEST PCA WITHOUT FEW COLUMNS
-test <- data2[,-c(2,4,9,10,15)] ## optioaly delete murder_pp
+test <- data[,-c(2,4,9,10,15)] ## optioaly delete murder_pp
 test2 <- na.omit(test)
 b <- princomp(test2[,-1], cor=T)
 summary(b, loadings=T)
