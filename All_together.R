@@ -142,7 +142,7 @@ pairs(data[,-1],
       }, pch = ".", cex = 1.5)
 
 # super fency correlation
-install.packages("PerformanceAnalytics")
+#install.packages("PerformanceAnalytics")
 library("PerformanceAnalytics")
 chart.Correlation(data[,-1], histogram=TRUE, pch=42)
 
@@ -160,7 +160,6 @@ summary(a, loadings=T)
 
 
 
-
 # HEre is a test where I deleted few columns.
 # See how PC increases/descreases while deleting less correlated columns
 ## TEST PCA WITHOUT FEW COLUMNS
@@ -170,3 +169,32 @@ b <- princomp(test2[,-1], cor=T)
 summary(b, loadings=T)
 
 chart.Correlation(test[,-1], histogram=TRUE, pch=42)
+
+
+
+# Create new a column continent and divide countires by continent
+library(countrycode)
+data$continent <- countrycode(sourcevar = data[, "country"],
+                            origin = "country.name",
+                            destination = "continent")
+
+# Just rearanage columns to get continent before country
+data <- data[,c(ncol(data),seq(1,ncol(data)-1,by=1))]
+
+#The function above did not divide coutries into America North, Central, South so I did this by hand
+subset(data, continent=='Americas') %>% select(country) %>% as.list()
+
+America_North <- c("Canada","United States","Mexico")
+America_South <- c("Peru","Ecuador","Chile","Bolivia","Venezuela","Paraguay","Brazil", 
+                   "Colombia",  "Guyana", "Suriname", "Uruguay", "Argentina")
+
+#Change the values from "Americas" into more specific part of America
+
+for (i in 1:nrow(data)){
+ifelse(data$continent[i] == "Americas", 
+       ifelse(data$country[i] %in% America_North,data$continent[i] <- 'North America',
+              ifelse(data$country[i] %in% America_South,data$continent[i] <- 'South America',
+                     data$continent[i] <- 'Central America')), data$country[i])
+}
+
+#Now we can code continent as binary
