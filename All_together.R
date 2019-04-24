@@ -135,7 +135,7 @@ summary(data)
 plot(data[,-1])
 
 # more fency correlation matrix plot
-pairs(data[,-1],
+pairs(data[,c(-1,-2)],
       panel = function (x, y, ...) {
         points(x, y, ...)
         abline(lm(y ~ x), col = "red")
@@ -144,7 +144,7 @@ pairs(data[,-1],
 # super fency correlation
 #install.packages("PerformanceAnalytics")
 library("PerformanceAnalytics")
-chart.Correlation(data[,-1], histogram=TRUE, pch=42)
+chart.Correlation(data[,c(-1,-2)], histogram=TRUE, pch=42)
 
 # correlation matrix (numbers)
 cor(data[,-1], use = "complete.obs")
@@ -173,6 +173,7 @@ chart.Correlation(test[,-1], histogram=TRUE, pch=42)
 
 
 # Create new a column continent and divide countires by continent
+
 library(countrycode)
 data$continent <- countrycode(sourcevar = data[, "country"],
                             origin = "country.name",
@@ -198,3 +199,8 @@ ifelse(data$continent[i] == "Americas",
 }
 
 #Now we can code continent as binary
+
+
+
+
+
