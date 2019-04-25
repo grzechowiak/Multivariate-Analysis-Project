@@ -3,10 +3,6 @@ library(readr)
 library(readxl)
 library(dplyr)
 
-######## ######## ######## ######## ######## 
-########## READ ALL DATA AND MERGE ########## 
-######## ######## ######## ######## ######## 
-
 #Read data
 population_tot <- read_csv("data/population_total.csv")
 murder_total_deaths <- read_csv("data/murder_total_deaths edited.csv")
@@ -128,14 +124,55 @@ data <- merge(data, gini, by="country", all=TRUE)
 
 
 
+########################
+
+######NA'S
+#Check numbers of NA's
+summary(data)
+
+###### CORRELATIONS
+# simple matrix correlation plot
+plot(data[,-1])
+
+# more fency correlation matrix plot
+pairs(data[,-1],
+      panel = function (x, y, ...) {
+        points(x, y, ...)
+        abline(lm(y ~ x), col = "red")
+      }, pch = ".", cex = 1.5)
+
+# super fency correlation
+#install.packages("PerformanceAnalytics")
+library("PerformanceAnalytics")
+chart.Correlation(data[,-1], histogram=TRUE, pch=42)
+
+# correlation matrix (numbers)
+cor(data[,-1], use = "complete.obs")
+cor(data[,-1], use = "pairwise.complete.obs")
 
 
-######## ######## ######## ######## ######## 
-######## NEW COLUMN - CONTINENT ######## 
-######## ######## ######## ######## ######## 
+#Check PC
+data_test <- na.omit(data)
+data
+a <- princomp(data_test[,-1], cor=T)
+summary(a, loadings=T)
+
+
+
+
+# HEre is a test where I deleted few columns.
+# See how PC increases/descreases while deleting less correlated columns
+## TEST PCA WITHOUT FEW COLUMNS
+test <- data[,-c(2,4,9,10,15)] ## optioaly delete murder_pp
+test2 <- na.omit(test)
+b <- princomp(test2[,-1], cor=T)
+summary(b, loadings=T)
+
+chart.Correlation(test[,-1], histogram=TRUE, pch=42)
+
+
 
 # Create new a column continent and divide countires by continent
-
 library(countrycode)
 data$continent <- countrycode(sourcevar = data[, "country"],
                               origin = "country.name",
@@ -160,20 +197,17 @@ for (i in 1:nrow(data)){
                        data$continent[i] <- 'Central America')), data$country[i])
 }
 
+#Now we can code continent as binary
 
 
-######## ######## ######## ######## ######## 
-######## INSERT MEDIAN ######## 
-######## ######## ######## ######## ######## 
-
-
+#missing values
 for(q in 1:ncol(data)){
   data[is.na(data[, q]), q] <- median(data[, q], na.rm = TRUE) 
 }
 
 
-
 #MDS
+
 mydata <- data[, c(-1,-2)]
 data.s <- scale(mydata)
 d <- dist(data.s)
@@ -193,5 +227,4 @@ cmd_continent <- cmdscale(dist(scale(by_continent[, c(-1,-2)])), k=2)
 colors <- c("#999999", "#E69F00", "#56B4E9", "#483D8B", "#8B0000", "#C71585", "#3CB371")
 plot(cmd_continent, xlab = "coordinate 1", ylab = "coordinate 2", pch=19, col=colors) 
 legend(-2.5, -2, fill=colors, legend=by_continent$Group.1, col=colors, cex=0.8)
-
 
