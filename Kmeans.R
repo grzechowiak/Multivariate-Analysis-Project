@@ -31,14 +31,16 @@ plot.wgss = function(mydata, maxc) {
 plot.wgss(filt.data, 20)
 
 
-install.packages("devtools")
+#install.packages("ggplot2")
+library("ggplot2")
+km <- kmeans(filt.data, centers = 7, nstart = 20)
+table(km$cluster)
+km$cluster
 
-library(ggbiplot)
+km$tot.withinss
 
-
-
-
-
+pca <- princomp(filt.data)
+plot(pca$scores[,1:3], col = km$cluster)
 
 
 

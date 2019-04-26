@@ -194,4 +194,3 @@ colors <- c("#999999", "#E69F00", "#56B4E9", "#483D8B", "#8B0000", "#C71585", "#
 plot(cmd_continent, xlab = "coordinate 1", ylab = "coordinate 2", pch=19, col=colors) 
 legend(-2.5, -2, fill=colors, legend=by_continent$Group.1, col=colors, cex=0.8)
 
-
