@@ -9,6 +9,9 @@ Module 3: Present hight PC1, PC2 on the map, coloring countires
 Module 5: EFA
 
 Module 6: Clustering - between countires
+- make hierarchical for countries, look how it looks like
+- make k-means for countries and interprete it by PCA or centers
+- plot a map for each group
 
 Module 7: CFA
 
@@ -21,4 +24,11 @@ Module 3. PCA : Asia is the most diverse continent. Africa the biggest in
 Module 4. MDS: Asia again is the most diverse. Africa is opposite than Europe
 USA and Canada s closer to Europe. Mexico closer to Central America
 
-Module 6. Cluster between continents
+Module 6. Cluster between continents: interesting that Oceania is grouped with Africa.
+the reason is that Oceania has Austrialia and NZ, but rest of countries are small islands
+rather poor, so it's classified on the same lvl as Africa
+#Make sense! 
+#Invstigate it here:
+#https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita#/media/File:GDP_per_capita_(nominal)_2015.png
+#https://en.wikipedia.org/wiki/List_of_Oceanian_countries_by_GDP_(nominal)
+
