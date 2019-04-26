@@ -3,6 +3,10 @@ library(readr)
 library(readxl)
 library(dplyr)
 
+######## ######## ######## ######## ######## 
+########## READ ALL DATA AND MERGE ########## 
+######## ######## ######## ######## ######## 
+
 #Read data
 population_tot <- read_csv("data/population_total.csv")
 murder_total_deaths <- read_csv("data/murder_total_deaths edited.csv")
@@ -124,60 +128,18 @@ data <- merge(data, gini, by="country", all=TRUE)
 
 
 
-########################
-
-######NA'S
-#Check numbers of NA's
-summary(data)
-
-###### CORRELATIONS
-# simple matrix correlation plot
-plot(data[,-1])
-
-# more fency correlation matrix plot
-pairs(data[,c(-1,-2)],
-      panel = function (x, y, ...) {
-        points(x, y, ...)
-        abline(lm(y ~ x), col = "red")
-      }, pch = ".", cex = 1.5)
-
-# super fency correlation
-#install.packages("PerformanceAnalytics")
-library("PerformanceAnalytics")
-chart.Correlation(data[,c(-1,-2)], histogram=TRUE, pch=42)
-
-# correlation matrix (numbers)
-cor(data[,-1], use = "complete.obs")
-cor(data[,-1], use = "pairwise.complete.obs")
 
 
-#Check PC
-data_test <- na.omit(data)
-data
-a <- princomp(data_test[,-1], cor=T)
-summary(a, loadings=T)
-
-
-
-
-# HEre is a test where I deleted few columns.
-# See how PC increases/descreases while deleting less correlated columns
-## TEST PCA WITHOUT FEW COLUMNS
-test <- data[,-c(2,4,9,10,15)] ## optioaly delete murder_pp
-test2 <- na.omit(test)
-b <- princomp(test2[,-1], cor=T)
-summary(b, loadings=T)
-
-chart.Correlation(test[,-1], histogram=TRUE, pch=42)
-
-
+######## ######## ######## ######## ######## 
+######## NEW COLUMN - CONTINENT ######## 
+######## ######## ######## ######## ######## 
 
 # Create new a column continent and divide countires by continent
 
 library(countrycode)
 data$continent <- countrycode(sourcevar = data[, "country"],
-                            origin = "country.name",
-                            destination = "continent")
+                              origin = "country.name",
+                              destination = "continent")
 
 # Just rearanage columns to get continent before country
 data <- data[,c(ncol(data),seq(1,ncol(data)-1,by=1))]
@@ -192,15 +154,19 @@ America_South <- c("Peru","Ecuador","Chile","Bolivia","Venezuela","Paraguay","Br
 #Change the values from "Americas" into more specific part of America
 
 for (i in 1:nrow(data)){
-ifelse(data$continent[i] == "Americas", 
-       ifelse(data$country[i] %in% America_North,data$continent[i] <- 'North America',
-              ifelse(data$country[i] %in% America_South,data$continent[i] <- 'South America',
-                     data$continent[i] <- 'Central America')), data$country[i])
+  ifelse(data$continent[i] == "Americas", 
+         ifelse(data$country[i] %in% America_North,data$continent[i] <- 'North America',
+                ifelse(data$country[i] %in% America_South,data$continent[i] <- 'South America',
+                       data$continent[i] <- 'Central America')), data$country[i])
 }
 
-#Now we can code continent as binary
 
 
+######## ######## ######## ######## ######## 
+######## INSERT MEDIAN ######## 
+######## ######## ######## ######## ######## 
 
 
-
+for(q in 1:ncol(data)){
+  data[is.na(data[, q]), q] <- median(data[, q], na.rm = TRUE) 
+}
