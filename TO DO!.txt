@@ -4,6 +4,7 @@ For each column, group by continent and put median into NAs
 
 Module 2 Find outliers: boxplots, bivariate plots.
 
+Module 3. Present hight PC1, PC2 on the map, coloring countires
 
 DONE:
 Module 3. PCA : Asia is the most diverse continent. Africa the biggest in 
