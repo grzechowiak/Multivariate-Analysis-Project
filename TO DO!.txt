@@ -1,0 +1,2 @@
+1. Cleaning data:
+For each column, group by continent and put median into NAs
