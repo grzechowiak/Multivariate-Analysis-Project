@@ -8,7 +8,6 @@ cmd <- cmdscale(d, k=3)
 library(scatterplot3d)
 s3d <- scatterplot3d(cmd, pch=16, cex.axis = 1)
 
-
 colors <- c("#999999", "#E69F00", "#56B4E9", "#483D8B", "#8B0000", "#C71585", "#3CB371")
 
 #True clusters: continents
@@ -16,6 +15,7 @@ colors <- c("#999999", "#E69F00", "#56B4E9", "#483D8B", "#8B0000", "#C71585", "#
 colors_data <- colors[as.numeric(factor(data$continent))]
 s3d <- scatterplot3d(cmd, pch=16, cex.axis = 1, color = colors_data)
 legend(3.9,6.1, fill=colors, legend=levels(factor(data$continent)), col=colors, cex=0.8)
+
 
 #group by continent and apply MDS
 by_continent <- aggregate(data[, 3:17], list(data$continent), mean)
