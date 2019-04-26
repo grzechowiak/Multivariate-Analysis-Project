@@ -20,6 +20,7 @@ colors_data <- colors[as.numeric(factor(data$continent))]
 s3d <- scatterplot3d(cmd, pch=16, cex.axis = 1, color = colors_data)
 legend(3.9,6.1, fill=colors, legend=levels(factor(data$continent)), col=colors, cex=0.8)
 
+
 #group by continent and apply MDS
 by_continent <- aggregate(data[, 3:17], list(data$continent), mean)
 cmd_continent <- cmdscale(dist(scale(by_continent[, c(-1,-2)])), k=5, eig = T)

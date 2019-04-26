@@ -1,2 +1,20 @@
-1. Cleaning data:
+TO DO:
+Module 1 Cleaning data:
 For each column, group by continent and put median into NAs
+
+Module 2 Find outliers: boxplots, bivariate plots.
+
+
+DONE:
+Module 3. PCA : Asia is the most diverse continent. Africa the biggest in 
+ child mortality and child per woman
+
+Module 4. MDS: Asia again is the most diverse. Africa is opposite than Europe
+USA and Canada s closer to Europe. Mexico closer to Central America
+
+TO DO: 
+Module 5: EFA
+
+Module 6: Clustering
+
+Module 7: CFA

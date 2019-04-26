@@ -39,16 +39,19 @@ km$cluster
 
 km$tot.withinss
 
-pca <- princomp(filt.data)
-plot(pca$scores[,1:3], col = km$cluster)
+#pca <- princomp(filt.data)
+#plot(pca$scores[,1:3], col = km$cluster)
+
+plot(filt.data[,c(9,5)], col = km$cluster , main = "K-Means Clusters" )
+text(filt.data[,c(9,5)], abbreviate(data$country),pch=16,cex=.6)
+
+km$centers
 
 
-
-
-
-
-
-
-
-
-
+########################
+#Model-Based Clustering#
+########################
+library(mclust)
+mc <- Mclust(filt.data[,c(3:10)],7)
+table(mc$classification, data$continent)
+plot(mc, what = "classification")
