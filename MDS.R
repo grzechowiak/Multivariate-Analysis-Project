@@ -7,7 +7,10 @@ cumsum(cmd$eig[1:5])/sum(cmd$eig[1:5])
 cmd <- cmdscale(d, k=3)
 library(scatterplot3d)
 s3d <- scatterplot3d(cmd, pch=16, cex.axis = 1)
-
+s3d.coords <- s3d$xyz.convert(cmd)
+text(s3d.coords$x[141], s3d.coords$y[141],           # x and y coordinates
+     labels=data$country[141],               # text to plot
+     cex=.5, pos=4)       
 
 colors <- c("#999999", "#E69F00", "#56B4E9", "#483D8B", "#8B0000", "#C71585", "#3CB371")
 
@@ -24,3 +27,8 @@ cumsum(cmd_continent$eig[1:5])/sum(cmd_continent$eig[1:5])
 cmd_continent <- cmdscale(dist(scale(by_continent[, c(-1,-2)])), k=2)
 plot(cmd_continent, xlab = "coordinate 1", ylab = "coordinate 2", pch=16, col=colors) 
 legend(-2.5, -1, fill=colors, legend=by_continent$Group.1, col=colors, cex=0.8)
+
+
+
+
+install.packages(c("rgl", "car"))
