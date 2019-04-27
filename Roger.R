@@ -29,3 +29,24 @@ plot.wgss = function(mydata, maxc) {
        ylab="Within groups sum of squares", main="Scree Plot")
 }
 plot.wgss(filt.data, 20)
+
+
+install.packages("devtools")
+
+library(ggbiplot)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
