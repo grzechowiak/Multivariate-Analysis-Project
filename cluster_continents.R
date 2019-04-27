@@ -37,4 +37,3 @@ cutree(hc,3)
 #1: Africa & Oceania
 #2: Asia & Central Ameica
 #3: South America, Europe, North America
-

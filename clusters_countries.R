@@ -60,7 +60,7 @@ gr6$country <- rownames(gr6)
 gr6 <- as.vector(unlist(gr6$country))
 
 
-
+# Plot all groups on the one map
 library(maptools)
 data(wrld_simpl)
 
@@ -69,23 +69,17 @@ country_colors[wrld_simpl@data$NAME %in% gr1] <- "#d53e4f"
 country_colors[wrld_simpl@data$NAME %in% gr2] <- "#fc8d59"
 country_colors[wrld_simpl@data$NAME %in% gr3] <- "#fee08b"
 country_colors[wrld_simpl@data$NAME %in% gr4] <- "#e6f598"
-country_colors[wrld_simpl@data$NAME %in% gr5] <- "#99d594"
+country_colors[wrld_simpl@data$NAME %in% gr5] <- "#91cf60"
 country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd"
-
-group <- c('1','2','3','4','5','6')
-color <- c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#99d594","#3288bd")
-col_gr <- data.frame(group, color)
 
 
 sort(wrld_simpl@data$NAME)
 plot(wrld_simpl, col = country_colors)
 title(main=paste("Clusters of Countries"))
-legend("topleft", inset=.1, title="Clusters",
-       c("1", "2","3", "4","5", "6"), 
-       fill=c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#99d594","#3288bd"), 
-       horiz=FALSE, cex=0.5)
+legend("bottomleft", inset=.09, title="",
+       c("Inequality", "Income/Gender","Low birthrate", "Developed","Crowded","Poor, Corrupted", "NoData"), 
+       fill=c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#91cf60","#3288bd", gray(.80)), 
+       horiz=FALSE, cex=0.7, bg="transparent",bty = "n")
 
-library(maptools)
-data(wrld_simpl)
-myCountries = wrld_simpl@data$NAME %in% c("Australia", "United Kingdom", "Germany", "United States", "Sweden", "Netherlands", "New Zealand")
-plot(wrld_simpl, col = c(gray(.80), "red")[myCountries+1])
+km$centers
+
