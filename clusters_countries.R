@@ -1,9 +1,16 @@
+#What is inside:
+#The function receives cleaned data and compute hierarchical 
+#clustering between continents.
+
+clusters_countries <- function(data_input=NULL) {
+  
+
 ########################################################
 #### COMPUTING THE DISTANCE BETWEEN COUNTRIES ####
 ########################################################
 
 #Copy data
-clus_coun <- data
+clus_coun <- cleaned
 row.names(clus_coun) <- clus_coun$country
 #delete columns: country, continent
 clus_coun[c(1,2)] <- NULL
@@ -21,10 +28,11 @@ plot.wgss = function(mydata, maxc) {
 }
 
 #Check # of cluster
-plot.wgss(clus_coun, 20)
+scree_plot2 %<a-%plot.wgss(clus_coun, 20)
 # Plots shows around 7 clausters
 
 #Perform clustering
+set.seed(123)
 km <- kmeans(clus_coun, centers=6, nstart = 20)
 table(km$cluster)
 
@@ -61,25 +69,30 @@ gr6 <- as.vector(unlist(gr6$country))
 
 
 # Plot all groups on the one map
-library(maptools)
+#library(maptools)
 data(wrld_simpl)
 
+#Specify Columns per group
 country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
-country_colors[wrld_simpl@data$NAME %in% gr1] <- "#d53e4f"
-country_colors[wrld_simpl@data$NAME %in% gr2] <- "#fc8d59"
-country_colors[wrld_simpl@data$NAME %in% gr3] <- "#fee08b"
-country_colors[wrld_simpl@data$NAME %in% gr4] <- "#e6f598"
-country_colors[wrld_simpl@data$NAME %in% gr5] <- "#91cf60"
-country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd"
+country_colors[wrld_simpl@data$NAME %in% gr1] <- "#d53e4f" #red
+country_colors[wrld_simpl@data$NAME %in% gr2] <- "#fee08b" #yellow
+country_colors[wrld_simpl@data$NAME %in% gr3] <- "#e6f598" #light green 
+country_colors[wrld_simpl@data$NAME %in% gr4] <- "#fc8d59" #orange
+country_colors[wrld_simpl@data$NAME %in% gr5] <- "#91cf60" #green 
+country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd" #blue 
 
+#Plot the map
+# sort(wrld_simpl@data$NAME)
+Cl_countries <-  plot(wrld_simpl, col = country_colors) 
+Cl_countries <- Cl_countries + title(main=paste("Clusters of Countries")) 
+Cl_countries <- Cl_countries <- legend("bottomleft", inset=.09, title="",
+            c("Poor, Corrupted", "Income/Gender","Low birthrate", "Crowded","Inequality","Developed", "NoData"), 
+            fill=c("#d53e4f","#fee08b", "#e6f598", "#fc8d59","#91cf60","#3288bd", gray(.80)), 
+            horiz=FALSE, cex=0.7, bg="transparent",bty = "n")
 
-sort(wrld_simpl@data$NAME)
-plot(wrld_simpl, col = country_colors)
-title(main=paste("Clusters of Countries"))
-legend("bottomleft", inset=.09, title="",
-       c("Inequality", "Income/Gender","Low birthrate", "Developed","Crowded","Poor, Corrupted", "NoData"), 
-       fill=c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#91cf60","#3288bd", gray(.80)), 
-       horiz=FALSE, cex=0.7, bg="transparent",bty = "n")
+centers <- km$centers
 
-km$centers
+ToReturn <- list(Cl_countries,centers) # Return two objects: Plot and Centers to interpret the plot
 
+return(ToReturn)
+}
