@@ -3,8 +3,8 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
-  word_document: default
   html_document: default
+  word_document: default
 ---
 
 The project...
@@ -21,10 +21,10 @@ source('Read_Clean.R')
 cleaned <- Read_Clean()
 ```
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=12,fig.height=8}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=20,fig.height=8}
 # PART 2: PCA
 library(pryr)
-library(ggbiplot) #if not present use code below
+library(ggbiplot) #if the library is not present use the code below
 #library(devtools)
 #install_github("vqv/ggbiplot")
 source('PCA.R')
@@ -40,7 +40,7 @@ source('cluster_continents.R')
 ```
 
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=12,fig.height=8}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=15,fig.height=10}
 # PART 4: K-means Clustering between Countries
 library(maptools)
 source('clusters_countries.R')

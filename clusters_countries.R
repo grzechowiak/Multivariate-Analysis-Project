@@ -1,12 +1,12 @@
 #What is inside:
-#The function receives cleaned data and compute hierarchical 
-#clustering between continents.
+#The function receives cleaned data and k-means 
+#clustering between countries.
 
 clusters_countries <- function(data_input=NULL) {
   
 
 ########################################################
-#### COMPUTING THE DISTANCE BETWEEN COUNTRIES ####
+################ K- MEANS CLUSTERS  ####################
 ########################################################
 
 #Copy data
@@ -85,10 +85,10 @@ country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd" #blue
 # sort(wrld_simpl@data$NAME)
 Cl_countries <-  plot(wrld_simpl, col = country_colors) 
 Cl_countries <- Cl_countries + title(main=paste("Clusters of Countries")) 
-Cl_countries <- Cl_countries <- legend("bottomleft", inset=.09, title="",
+Cl_countries <- Cl_countries <- legend(x=-180,y=15, inset=.09, title="",
             c("Poor, Corrupted", "Income/Gender","Low birthrate", "Crowded","Inequality","Developed", "NoData"), 
             fill=c("#d53e4f","#fee08b", "#e6f598", "#fc8d59","#91cf60","#3288bd", gray(.80)), 
-            horiz=FALSE, cex=0.7, bg="transparent",bty = "n")
+            horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
 
 centers <- km$centers
 

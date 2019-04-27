@@ -173,9 +173,9 @@ for (i in 1:nrow(data)){
 ######## ######## ######## ######## ######## 
 
 
-for(q in 1:ncol(data)){
-  data[is.na(data[, q]), q] <- median(data[, q], na.rm = TRUE) 
-}
+# for(q in 1:ncol(data)){
+#   data[is.na(data[, q]), q] <- median(data[, q], na.rm = TRUE) 
+# }
 
 
 return(data)
