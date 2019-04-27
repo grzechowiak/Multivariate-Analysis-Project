@@ -1,6 +1,6 @@
 .DS_Store
 .Rapp.history
 .Rproj.user
-.Rhistory
+.Rhistory*
 .RData
 .Ruserdata
