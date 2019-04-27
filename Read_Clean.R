@@ -1,7 +1,13 @@
-#Read Libraries
-library(readr)
-library(readxl)
-library(dplyr)
+
+#What is inside:
+# The function, read all csv files and merge them together. Later a new column 
+# "continent" is created based on the column "country". On the end that is cleaned.
+
+Read_Clean <- function(data_input=NULL){
+
+
+
+
 
 ######## ######## ######## ######## ######## 
 ########## READ ALL DATA AND MERGE ########## 
@@ -136,7 +142,7 @@ data <- merge(data, gini, by="country", all=TRUE)
 
 # Create new a column continent and divide countires by continent
 
-library(countrycode)
+#library(countrycode)
 data$continent <- countrycode(sourcevar = data[, "country"],
                               origin = "country.name",
                               destination = "continent")
@@ -163,10 +169,14 @@ for (i in 1:nrow(data)){
 
 
 ######## ######## ######## ######## ######## 
-######## INSERT MEDIAN ######## 
+######## DATA CLEANING INSERT MEDIAN ######## 
 ######## ######## ######## ######## ######## 
 
 
 for(q in 1:ncol(data)){
   data[is.na(data[, q]), q] <- median(data[, q], na.rm = TRUE) 
 }
+
+
+return(data)
+} #end of the function
