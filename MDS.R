@@ -12,13 +12,44 @@ text(s3d.coords$x[141], s3d.coords$y[141],           # x and y coordinates
      labels=data$country[141],               # text to plot
      cex=.5, pos=4)       
 
-colors <- c("#999999", "#E69F00", "#56B4E9", "#483D8B", "#8B0000", "#C71585", "#3CB371")
 
 #True clusters: continents
-
+colors <- c("#999999", "#E69F00", "#56B4E9", "#483D8B", "#8B0000", "#C71585", "#3CB371")
 colors_data <- colors[as.numeric(factor(data$continent))]
-s3d <- scatterplot3d(cmd, pch=16, cex.axis = 1, color = colors_data)
-legend(3.9,6.1, fill=colors, legend=levels(factor(data$continent)), col=colors, cex=0.8)
+frames <- 360
+rename <- function(x){
+  if (x < 10) {
+    return(name <- paste('000',i,'plot.png',sep=''))
+  }
+  if (x < 100 && i >= 10) {
+    return(name <- paste('00',i,'plot.png', sep=''))
+  }
+  if (x >= 100) {
+    return(name <- paste('0', i,'plot.png', sep=''))
+  }
+}
+for(i in 1:frames){
+  name <- rename(i)
+  
+  png(name)
+  scatterplot3d(cmd,
+                main=paste("Angle", i),
+                angle=i,
+                pch=16,
+                cex.axis = 1,
+                color=colors_data)
+  legend(3.9,6.1, fill=colors, legend=levels(factor(data$continent)), col=colors, cex=0.8)
+  
+  dev.off()
+}
+
+my_command <- 'convert *.png -delay 1 -loop 0 3d.gif'
+system(my_command)
+my_command <- 'rm *.png'
+system(my_command)
+
+
+
 
 
 #group by continent and apply MDS
