@@ -21,6 +21,8 @@ source('Read_Clean.R')
 cleaned <- Read_Clean()
 ```
 
+
+
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=20,fig.height=8}
 # PART 2: PCA
 library(pryr)

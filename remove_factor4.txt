@@ -8,14 +8,9 @@ Factor2 -> urban_pop_tot, lambda7, NA
 Factor2 -> pop_total, lambda8, NA
 Factor3 -> sex_ratio_p100, lambda9, NA               
 Factor3 -> income_per_person, lambda10, NA    
-Factor4 -> murder_pp, lambda11, NA  
-Factor4 -> gini, lambda12, NA
 Factor1 <-> Factor2, rho0, NA
 Factor1 <-> Factor3, rho1, NA
-Factor1 <-> Factor4, rho2, NA
-Factor2 <-> Factor3, rho3, NA
-Factor2 <-> Factor4, rho4, NA
-Factor3 <-> Factor4, rho5, NA
+Factor2 <-> Factor3, rho2, NA
 phones_p100 <-> phones_p100, theta1, NA
 life_exp_yrs <-> life_exp_yrs, theta2, NA
 corruption_CPI <-> corruption_CPI, theta3, NA
@@ -26,9 +21,6 @@ urban_pop_tot <-> urban_pop_tot, theta7, NA
 pop_total <-> pop_total, theta8, NA
 sex_ratio_p100 <-> sex_ratio_p100, theta9, NA
 income_per_person <-> income_per_person, theta10, NA
-murder_pp <-> murder_pp, theta11, NA
-gini <-> gini, theta12, NA
 Factor1 <-> Factor1, NA, 1
 Factor2 <-> Factor2, NA, 1
 Factor3 <-> Factor3, NA, 1
-Factor4 <-> Factor4, NA, 1
