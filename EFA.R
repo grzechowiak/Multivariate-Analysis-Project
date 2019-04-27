@@ -50,6 +50,8 @@ country_colors[wrld_simpl@data$NAME %in% gr4] <- "yellow"
 
 sort(wrld_simpl@data$NAME)
 plot(wrld_simpl, col = country_colors)
-legend(3.9,6.1, fill=colors, legend=), col=colors, cex=0.5)
-
+legend("bottomleft", inset=.1, title="Factors",
+       c("Developed", "Crowded","Income/Gender", "Inequality"), 
+       fill=c("red", "blue", "green","yellow"), 
+       horiz=FALSE, cex=0.5)
 
