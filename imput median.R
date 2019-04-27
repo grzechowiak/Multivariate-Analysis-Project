@@ -11,16 +11,9 @@ for(i in 1:length(col_names)){
 
     for (j in 1:nrow(cleaned)){
       if(is.na(cleaned[j,i])){
-        cleaned[j,i] <- x[x$continent==cleaned$continent[j],2]
+        cleaned[j,i] <- x[x$continent==cleaned$continent[j],i-1]
       }
     }
   }
 }
 
-
-
-#1
-df.new = as.data.frame(lapply(cleaned, function(x) ifelse(is.na(x), 0, print(x))))
-
-#2
-lapply(cleaned,print(cleaned[1,1]))  

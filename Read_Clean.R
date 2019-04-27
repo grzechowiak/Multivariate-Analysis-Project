@@ -168,14 +168,34 @@ for (i in 1:nrow(data)){
 
 
 
+
 ######## ######## ######## ######## ######## 
 ######## DATA CLEANING INSERT MEDIAN ######## 
 ######## ######## ######## ######## ######## 
 
+#Each NA value is replaced by the median value for the continent. 
 
-# for(q in 1:ncol(data)){
-#   data[is.na(data[, q]), q] <- median(data[, q], na.rm = TRUE) 
-# }
+#make a list of column names
+col_names <- as.vector(names(data))
+
+#Group by continent and find median
+x <- aggregate(. ~ continent, data=data[,c(-2)], FUN=median)
+
+#Create a sign for opposite of %in%
+'%ni%' <- Negate('%in%')
+
+#Iterate thru columns and row. If NA spotted insert median, depending on continent.
+for(i in 1:length(col_names)){
+  if (col_names[i] %ni% c("continent","country")) {
+    
+    for (j in 1:nrow(data)){
+      if(is.na(data[j,i])){
+        data[j,i] <- x[x$continent==data$continent[j],i-1]
+      }
+    }
+  }
+}
+
 
 
 return(data)

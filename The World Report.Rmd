@@ -19,6 +19,11 @@ library(countrycode)
 
 source('Read_Clean.R')
 cleaned <- Read_Clean()
+
+#After Cleaning, check how many NA values are in dataset.
+cleaned %>%
+  select(everything()) %>%
+  summarise_all(funs(sum(is.na(.)))) %>% rowSums()
 ```
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=20,fig.height=8}
