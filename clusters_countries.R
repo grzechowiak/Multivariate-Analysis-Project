@@ -80,11 +80,10 @@ col_gr <- data.frame(group, color)
 sort(wrld_simpl@data$NAME)
 plot(wrld_simpl, col = country_colors)
 title(main=paste("Clusters of Countries"))
-# legend(1, 95, legend=c("1", "2","3", "4","5", "6"),
-#        col=c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#99d594","#3288bd"), lty=1:2, cex=0.8)
-
-legend("bottom", inset=.02, title="Clusters",
-       c("1", "2","3", "4","5", "6"), fill =c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#99d594","#3288bd"), horiz=TRUE, cex=0.8)
+legend("topleft", inset=.1, title="Clusters",
+       c("1", "2","3", "4","5", "6"), 
+       fill=c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#99d594","#3288bd"), 
+       horiz=FALSE, cex=0.5)
 
 library(maptools)
 data(wrld_simpl)
