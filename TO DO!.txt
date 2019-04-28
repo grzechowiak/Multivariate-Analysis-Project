@@ -6,8 +6,7 @@ Module 5: EFA
 
 Module 6: Clustering - between countires
 - make hierarchical for countries, look how it looks like
-- Match colors for k-means & model based
-- compare results k-means with model based
+
  
 Module 7: CFA
 
@@ -37,3 +36,5 @@ Module 6: Clustering - between countires
 - make k-means for countries and interprete it by PCA or centers
 - plot a map for each grou
 - do model based clustering
+- Match colors for k-means & model based
+- compare results k-means with model based

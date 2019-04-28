@@ -92,7 +92,6 @@ library(mclust)
 library(maptools)
 source('clusters_countries.R')
 Cl_countries <- clusters_countries(cleaned)
-
 ```
 
 - compare chi.square test -> dependency between groups and continents. Model based groups are more similar to continents.
@@ -109,12 +108,15 @@ pop_total murder_pp armed_pp phones_p100 children_p_woman life_exp_yrs suicide_p
 
 - we lost "crowded" group from k-means. It transfoms into group 7 which describe high Income, Sex Ratio, Population, phones
 
-```{r}
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 #PART 5: EFA
+source('EFA.R')
+EFA(cleaned)
 ```
 
 
 ```{r}
 #PART 6: CFA
+#???????
 ```
 
