@@ -1,11 +1,10 @@
 
 library(sem)
 library(dplyr)
-cfa_data <- readRDS("my_cor.rds")
-cfa_data <- cfa_data[,c(-1,-2,-4,-5,-9,-11,-15,-16,-17)]
-cfa_data <- select(cfa_data, 'phones_p100', 'life_exp_yrs', 'corruption_CPI', 
+
+data <- readRDS("my_data.rds")
+cfa_data <- select(data, 'phones_p100', 'life_exp_yrs', 'corruption_CPI', 
                    'internet_%of_pop', 'children_p_woman', 'child_mort_p1000', 'urban_pop_tot', 'pop_total')
-as.data.frame(cfa_data)
 cfa_model <- specifyModel(text = "
                           Factor1          -> phones_p100, lambda1, NA              
                           Factor1          -> life_exp_yrs, lambda2, NA  
@@ -26,11 +25,6 @@ cfa_model <- specifyModel(text = "
                           pop_total        <-> pop_total, theta8, NA
                           Factor1          <-> Factor1, NA, 1
                           Factor2          <-> Factor2, NA, 1")
-cfa_sem <- sem(cfa_model, cfa_data, 195, debug = T)
+cfa_sem <- sem(cfa_model, cor(cfa_data), 195, debug = T)
 summary(cfa_sem)
-
-
-
-
-cor_data <- cor(cfa_data[,c(-1,-2)])
 
