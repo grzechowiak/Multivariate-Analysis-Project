@@ -139,29 +139,25 @@ gr6.mc <- as.vector(unlist(gr6.mc$country))
 gr7.mc <- filter(mc_groups, group==7)
 gr7.mc <- as.vector(unlist(gr7.mc$country))
 
-cleaned[cleaned[,2] %in% gr7.mc]
-
-test <- cleaned %>% filter(country %in% gr7.mc) %>% #select('country','pop_total',"income_per_person",'sex_ratio_p100') 
-test$pop_total <- test$pop_total/100000
 
 #library(maptools)
 data(wrld_simpl)
 #Specify Columns per group
 country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
 country_colors[wrld_simpl@data$NAME %in% gr1.mc] <- "#d53e4f" #red "Poor/Corrupted"
-country_colors[wrld_simpl@data$NAME %in% gr2.mc] <- "#91cf60" #green "Developed"
-country_colors[wrld_simpl@data$NAME %in% gr3.mc] <- "#d53e4f" #roseeeeee   "Semi-Developed"
-country_colors[wrld_simpl@data$NAME %in% gr4.mc] <- "#fc8d59" #orange "Not Crowded"
-country_colors[wrld_simpl@data$NAME %in% gr5.mc] <- "#fee08b" #yellow  "Highly Developed"
-country_colors[wrld_simpl@data$NAME %in% gr6.mc] <- "#3288bd" #blue  "Unequal/Corrupted"
-country_colors[wrld_simpl@data$NAME %in% gr7.mc] <- "#f1a340" #orange  "Income/Gender"
+country_colors[wrld_simpl@data$NAME %in% gr2.mc] <- "#41ab5d" #MIDDLE green "Developed"
+country_colors[wrld_simpl@data$NAME %in% gr3.mc] <- "#c7e9c0" #LEAST green   "Semi-Developed"
+country_colors[wrld_simpl@data$NAME %in% gr4.mc] <- "#fb590e" #orange "Not Crowded"
+country_colors[wrld_simpl@data$NAME %in% gr5.mc] <- "#006d2c" #MOST green  "Highly Developed"
+country_colors[wrld_simpl@data$NAME %in% gr6.mc] <- "#fee08b" #yellow  "Unequal/Corrupted"
+country_colors[wrld_simpl@data$NAME %in% gr7.mc] <- "#f1a340" #orange  "Urban Population/Phones"
 
 #Plot the map
 Cl_countries.mc <-  plot(wrld_simpl, col = country_colors) 
 Cl_countries.mc <- Cl_countries.mc + title(main=paste("Model Based Clustering")) 
 Cl_countries.mc <- Cl_countries.mc <- legend(x=-180,y=15, inset=.09, title="",
-                                       c("Poor/Corrupted","Developed","Semi-Developed","Low population","Highly Developed","Unequal/Corrupted","Population/Income/Gender","NoData"), 
-                                       fill=c("#d53e4f","#91cf60", "#d53e4f", "#fc8d59","#91cf60","#3288bd" ,"#f1a340", gray(.80)), 
+                                       c("Poor/Corrupted","Developed","Semi-Developed","Low population","Highly Developed","Unequal/Corrupted","Urban Population/Phones","NoData"), 
+                                       fill=c("#d53e4f","#41ab5d", "#c7e9c0", "#fb590e","#006d2c","#fee08b" ,"#f1a340", gray(.80)), 
                                        horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
 
 
@@ -169,6 +165,9 @@ Cl_countries.mc <- Cl_countries.mc <- legend(x=-180,y=15, inset=.09, title="",
 
 ## Centroids to interprete the clusters
 round(t(mc$parameters[["mean"]]),3)
+
+#group 7
+round(t(mc$parameters[["mean"]][,7]),3)
 
 
 #COMPARE

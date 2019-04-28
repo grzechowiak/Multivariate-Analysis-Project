@@ -3,6 +3,7 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
+  pdf_document: default
   html_document: default
   word_document: default
 ---
@@ -64,7 +65,7 @@ the relation.
 # PC2: sex ratio is high, suicide low
 # PC3: inequality is high
 
-- ellipses to help visualize concentration of points. The size of ellipses is influenced by outliers.
+- ellipses to help visualize concentration of points. The size of ellipses is influenced by outlines.
 
 - on the right we have develope countires: EU, North America where the most correlated are: less corruption, internet, life exp., phones, income.
 - on the left have not as developed countries: Africa where Child mortality and children per woman and inequality is high.
@@ -82,7 +83,7 @@ Cl_continents <- cluster_continents(cleaned)
 ```
 Include all variables
 
-South, North and Europe are very similar. AND C America, Asia, Oceania and Africa are similar. Iteresting is Africa is clustered with Oceania (with include Australia and NZ but also many small isnland which push Oceania into level of Africa)
+South, North and Europe are very similar. AND C America, Asia, Oceania and Africa are similar. Interesting is Africa is clustered with Oceania (with include Australia and NZ but also many small island which push Oceania into level of Africa)
 
 
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
@@ -96,6 +97,17 @@ Cl_countries <- clusters_countries(cleaned)
 
 - compare chi.square test -> dependency between groups and continents. Model based groups are more similar to continents.
 
+- model based (group7) difficult name (result for this group)
+pop_total murder_pp armed_pp phones_p100 children_p_woman life_exp_yrs suicide_pp urban_pop_tot sex_ratio_p100
+[1,] 239114394         0    0.011     146.317             2.07       78.053          0     118882678        148.681
+     corruption_CPI internet_%of_pop child_mort_p1000 income_per_person investments_per_ofGDP   gini
+[1,]         53.677           75.725           10.791          50579.31                29.942 39.722
+
+- Developed countries are split into 3 groups.
+
+- poor countries are the same in both models
+
+- we lost "crowded" group from k-means. It transfoms into group 7 which describe high Income, Sex Ratio, Population, phones
 
 ```{r}
 #PART 5: EFA
