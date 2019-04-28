@@ -32,4 +32,5 @@ summary(cfa_sem)
 
 
 
-
+cor_data <- cor(cfa_data[,c(-1,-2)])
+saveRDS(cor_data, file = "my_cor.rds")
