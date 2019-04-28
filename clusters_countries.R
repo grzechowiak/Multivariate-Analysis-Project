@@ -141,7 +141,8 @@ gr7.mc <- as.vector(unlist(gr7.mc$country))
 
 cleaned[cleaned[,2] %in% gr7.mc]
 
-filter(cleaned[,2] %in% gr7.mc)
+test <- cleaned %>% filter(country %in% gr7.mc) %>% #select('country','pop_total',"income_per_person",'sex_ratio_p100') 
+test$pop_total <- test$pop_total/100000
 
 #library(maptools)
 data(wrld_simpl)
