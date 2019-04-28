@@ -3,8 +3,8 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
-  word_document: default
   html_document: default
+  word_document: default
 ---
 #Introduction:
 Team clearly described the dataset and clearly described the motivation behind studying the data. Team provided
@@ -39,6 +39,7 @@ Part A: MDS
 ```{r}
 #PART 2: MDS
 ```
+![image](img/3d.gif)
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=8,fig.height=8}
 # PART 3: PCA
