@@ -27,9 +27,15 @@ cleaned <- Read_Clean()
 #   summarise_all(funs(sum(is.na(.)))) %>% rowSums()
 ```
 
+```{r}
+#PART 2: MDS
+```
+
+
+
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=8,fig.height=8}
-# PART 2: PCA
+# PART 3: PCA
 library(pryr)
 library(ggbiplot) #if the library is not present use the code below
 #library(devtools)
@@ -54,5 +60,15 @@ library(maptools)
 source('clusters_countries.R')
 Cl_countries <- clusters_countries(cleaned)
 #Show Centers
+```
+
+
+```{r}
+#PART 5: EFA
+```
+
+
+```{r}
+#PART 6: CFA
 ```
 
