@@ -207,8 +207,8 @@ for(i in 1:length(col_names)){
 
 ##Check by Boxplots
 
-library(car)
-par(mfrow=c(3,5))
+#library(car)
+layout(matrix(c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15), nrow = 3, ncol = 5, byrow = TRUE))
 
 #Pop_Total Column
 with(data, Boxplot(pop_total, id=list(labels=data$country),main="Population Total"))
@@ -259,21 +259,23 @@ with(data, Boxplot(gini, id=list(labels=data$country),main="GINI Ratio"))
 
 ## Check by Histograms
 
-hist(data$pop_total)
-hist(data$murder_pp)
-hist(data$armed_pp)
-hist(data$phones_p100)
-hist(data$children_p_woman)
-hist(data$life_exp_yrs)
-hist(data$suicide_pp)
-hist(data$urban_pop_tot)
-hist(data$sex_ratio_p100)
-hist(data$corruption_CPI)
-hist(data$`internet_%of_pop`)
-hist(data$child_mort_p1000)
-hist(data$income_per_person)
-hist(data$investments_per_ofGDP)
-hist(data$gini)
+# uncomment to check histograms:
+
+# hist(data$pop_total)
+# hist(data$murder_pp)
+# hist(data$armed_pp)
+# hist(data$phones_p100)
+# hist(data$children_p_woman)
+# hist(data$life_exp_yrs)
+# hist(data$suicide_pp)
+# hist(data$urban_pop_tot)
+# hist(data$sex_ratio_p100)
+# hist(data$corruption_CPI)
+# hist(data$`internet_%of_pop`)
+# hist(data$child_mort_p1000)
+# hist(data$income_per_person)
+# hist(data$investments_per_ofGDP)
+# hist(data$gini)
 
 
 

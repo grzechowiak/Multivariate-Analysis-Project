@@ -1,5 +1,5 @@
 #What is inside:
-#The function receives cleaned data and k-means 
+#The function receives cleaned data perform k-means & mode based
 #clustering between countries.
 
 clusters_countries <- function(data_input=NULL) {
@@ -28,7 +28,7 @@ plot.wgss = function(mydata, maxc) {
 }
 
 #Check # of cluster
-scree_plot2 %<a-%plot.wgss(clus_coun, 20)
+#scree_plot2 <- plot.wgss(clus_coun, 20)
 # Plots shows around 7 clausters
 
 #Perform clustering
@@ -82,9 +82,8 @@ country_colors[wrld_simpl@data$NAME %in% gr5] <- "#91cf60" #green
 country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd" #blue 
 
 #Plot the map
-# sort(wrld_simpl@data$NAME)
 Cl_countries <-  plot(wrld_simpl, col = country_colors) 
-Cl_countries <- Cl_countries + title(main=paste("Clusters of Countries")) 
+Cl_countries <- Cl_countries + title(main=paste("K-Means Clustering")) 
 Cl_countries <- Cl_countries <- legend(x=-180,y=15, inset=.09, title="",
             c("Poor, Corrupted", "Income/Gender","Low birthrate", "Crowded","Inequality","Developed", "NoData"), 
             fill=c("#d53e4f","#fee08b", "#e6f598", "#fc8d59","#91cf60","#3288bd", gray(.80)), 
@@ -92,7 +91,84 @@ Cl_countries <- Cl_countries <- legend(x=-180,y=15, inset=.09, title="",
 
 centers <- km$centers
 
-ToReturn <- list(Cl_countries,centers) # Return two objects: Plot and Centers to interpret the plot
 
-return(ToReturn)
+
+
+
+########################################################
+################ MODEL BASED CLUSTERS  #################
+########################################################
+
+#library(mclust)
+
+#Perform Model based Clustering
+set.seed(123)
+mc <- Mclust(cleaned[,c(-1,-2)])
+
+cat("\014") ## just a trick to clean a console. In order to avoid annoying R Console info
+# in Rmarkdown information.
+
+#Check summary
+summary(mc)
+
+#Match clusters with country names and transfer into df
+mc_groups <- cbind(mc$classification, cleaned$country)
+mc_groups <- as.data.frame(mc_groups)
+colnames(mc_groups) <- c("group", "country")
+
+#Create new df for each group and save as a list 
+gr1.mc <- filter(mc_groups, group==1)
+gr1.mc <- as.vector(unlist(gr1.mc$country))
+
+gr2.mc <- filter(mc_groups, group==2)
+gr2.mc <- as.vector(unlist(gr2.mc$country))
+
+gr3.mc <- filter(mc_groups, group==3)
+gr3.mc <- as.vector(unlist(gr3.mc$country))
+
+gr4.mc <- filter(mc_groups, group==4)
+gr4.mc <- as.vector(unlist(gr4.mc$country))
+
+gr5.mc <- filter(mc_groups, group==5)
+gr5.mc <- as.vector(unlist(gr5.mc$country))
+
+gr6.mc <- filter(mc_groups, group==6)
+gr6.mc <- as.vector(unlist(gr6.mc$country))
+
+gr7.mc <- filter(mc_groups, group==7)
+gr7.mc <- as.vector(unlist(gr7.mc$country))
+
+#library(maptools)
+data(wrld_simpl)
+#Specify Columns per group
+country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
+country_colors[wrld_simpl@data$NAME %in% gr1.mc] <- "#d53e4f" #red
+country_colors[wrld_simpl@data$NAME %in% gr2.mc] <- "#fee08b" #yellow
+country_colors[wrld_simpl@data$NAME %in% gr3.mc] <- "#e6f598" #light green 
+country_colors[wrld_simpl@data$NAME %in% gr4.mc] <- "#fc8d59" #orange
+country_colors[wrld_simpl@data$NAME %in% gr5.mc] <- "#91cf60" #green 
+country_colors[wrld_simpl@data$NAME %in% gr6.mc] <- "#3288bd" #blue 
+country_colors[wrld_simpl@data$NAME %in% gr7.mc] <- "#f1a340" #purple or sth 
+
+#Plot the map
+Cl_countries.mc <-  plot(wrld_simpl, col = country_colors) 
+Cl_countries.mc <- Cl_countries.mc + title(main=paste("Model Based Clustering")) 
+Cl_countries.mc <- Cl_countries.mc <- legend(x=-180,y=15, inset=.09, title="",
+                                       c("sth","sth","sth","sth","sth","sth","sth","NoData"), 
+                                       fill=c("#d53e4f","#fee08b", "#e6f598", "#fc8d59","#91cf60","#3288bd" ,"#f1a340", gray(.80)), 
+                                       horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
+
+
+
+
+## Centroids to interprete the clusters
+round(t(mc$parameters[["mean"]]),3)
+
+
+
+
+
+#ToReturn <- list(Cl_countries, Cl_countries.mc) # Return two objects: Plot and Centers to interpret the plot
+
+return()
 }
