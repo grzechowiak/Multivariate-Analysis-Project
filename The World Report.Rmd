@@ -3,12 +3,16 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
-  word_document: default
   html_document: default
+  word_document: default
 ---
+#Introduction:
+Team clearly described the dataset and clearly described the motivation behind studying the data. Team provided
+scholarly citations or quantitative facts to describe the motivation.
 
-The project...
-
+#Data Cleaning and Outlier Visualization:
+Team clearly described their data cleaning and outlier removal process. Team presented insightful visualizations
+motivating to do further exploratory or confirmatory analysis.
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE,dpi=300, fig.width=20,fig.height=11}
 #PART 1: Read csv, merge, clean and plot outliers.
@@ -26,10 +30,21 @@ cleaned <- Read_Clean()
 #   select(everything()) %>%
 #   summarise_all(funs(sum(is.na(.)))) %>% rowSums()
 ```
+#Dimension Reduction Analysis: 
+Team applied dimension reduction analysis correctly and discussed the
+motivation behind that. Also, they provided interesting insights into the
+results.
 
+Part A: MDS
+-Clusters
+-Asia: we can see is the most spread out and has the most outliers, spreads across Africa to Europe 
+-Africa is the opposite of Europe
+-South America and North America are similar
+-
 ```{r}
 #PART 2: MDS
 ```
+![image](img/3d.gif)
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=8,fig.height=8}
 # PART 3: PCA
