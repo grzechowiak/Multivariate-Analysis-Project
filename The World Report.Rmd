@@ -3,17 +3,17 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
   word_document: default
 ---
-#I. Introduction:
-Team clearly described the dataset and clearly described the motivation behind studying the data. Team provided
-scholarly citations or quantitative facts to describe the motivation.
+#I. Introduction: ROGELIO
+<!-- Team clearly described the dataset and clearly described the motivation behind studying the data. Team provided -->
+<!-- scholarly citations or quantitative facts to describe the motivation. -->
 
-#II. Data Cleaning and Outlier Visualization:
-Team clearly described their data cleaning and outlier removal process. Team presented insightful visualizations
-motivating to do further exploratory or confirmatory analysis.
+#II. Data Cleaning and Outlier Visualization: ROGELIO
+<!-- Team clearly described their data cleaning and outlier removal process. Team presented insightful visualizations -->
+<!-- motivating to do further exploratory or confirmatory analysis. -->
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE,dpi=300, fig.width=20,fig.height=11}
 #PART 1: Read csv, merge, clean and plot outliers.
@@ -30,25 +30,32 @@ cleaned <- Read_Clean()
 
 
 
-#III. Dimension Reduction Analysis: 
-Team applied dimension reduction analysis correctly and discussed the
-motivation behind that. Also, they provided interesting insights into the
-results.
+#III. Dimension Reduction Analysis: MIKA & ME
+<!-- Team applied dimension reduction analysis correctly and discussed the -->
+<!-- motivation behind that. Also, they provided interesting insights into the -->
+<!-- results. -->
 
-##Part A: MDS
+The data set contains 17 variables. In order to easly present them, dimension reduction analysis were computed. Two techniques were used: Multidimensional Scaling (MDS) and Principal Component Analysis (PCA).
+
+
+##Part A: MDS -> MIKA
 - ALL VARIABLES INCLUDED
 -we can see Clusters
 -Asia: we can see is the most spread out and has the most outliers, spreads across Africa to Europe 
 -Africa is the opposite of Europe
 -South America and North America are similar
--
+
 ```{r}
 #PART 2: MDS
+library(scatterplot3d)
 ```
-![image](img/3d.gif)
+![image](img/mds2_high_r.gif)
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=8,fig.height=8}
+
+##Part B: Principal Components -> ME
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 # PART 3: PCA
+library(maptools)
 library(pryr)
 library(ggbiplot) #if the library is not present use the code below
 #library(devtools)
@@ -59,6 +66,8 @@ source('PCA.R')
 FROM PCA excluded are: pop_total, murder_pp, armed_pp, urban_pop_tot, investment_per_of_GDP
 it is because they spoil correlation between variables and as such more PC would be needed to explain
 the relation.
+
+![image](img/PCA_loadings.png)
 
 ## PCA MEANING:
 # PC1: Developed countries, HIGH loaded in: phones, life exp., less corrup., internet income 
@@ -75,6 +84,9 @@ the relation.
 - on PC1 & PC3 explain better Africa. (it is because PC3 is mostly about inequality and development)
 
 
+#IV. CLUSTERING - ROGELIO
+### PART A: Hierarchical Clustering between Continents
+
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=11,fig.height=7}
 # PART 3: Hierarchical Clustering between Continents
 library(ape)
@@ -86,10 +98,11 @@ Include all variables
 South, North and Europe are very similar. AND C America, Asia, Oceania and Africa are similar. Interesting is Africa is clustered with Oceania (with include Australia and NZ but also many small island which push Oceania into level of Africa)
 
 
+#PART B: K-means and Model-Based clustering between Conutries
+Jereamy both
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 # PART 4: K-means & Model Based Clustering between Countries
 library(mclust)
-library(maptools)
 source('clusters_countries.R')
 Cl_countries <- clusters_countries(cleaned)
 ```
@@ -108,15 +121,22 @@ pop_total murder_pp armed_pp phones_p100 children_p_woman life_exp_yrs suicide_p
 
 - we lost "crowded" group from k-means. It transfoms into group 7 which describe high Income, Sex Ratio, Population, phones
 
+
+
+# V. Exploratory Factor Analysis -MIKA
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 #PART 5: EFA
 source('EFA.R')
 EFA(cleaned)
 ```
 
-
+#VI. Confirmatory Factor Analysis -> Mika put links
 ```{r}
 #PART 6: CFA
 #???????
 ```
 
+
+
+#VII. Conclusion ->
+<!-- Team presented meaningful findings and discussed the pros and cons of their study. Team suggested some future works for post analysis. -->

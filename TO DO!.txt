@@ -4,10 +4,8 @@ Module 3: Present hight PC1, PC2 on the map, coloring countires
 
 Module 5: EFA
 
-Module 6: Clustering - between countires
-- make hierarchical for countries, look how it looks like
 
- 
+
 Module 7: CFA
 
 
