@@ -3,32 +3,32 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
-  html_document: default
   word_document: default
+  html_document: default
 ---
 
 The project...
 
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE,dpi=300, fig.width=20,fig.height=11}
 #PART 1: Read csv, merge, clean and plot outliers.
 library(readr)
 library(readxl)
 library(dplyr)
 library(countrycode)
+library(car)
 
 source('Read_Clean.R')
 cleaned <- Read_Clean()
 
 #After Cleaning, check how many NA values are in dataset.
-cleaned %>%
-  select(everything()) %>%
-  summarise_all(funs(sum(is.na(.)))) %>% rowSums()
+# cleaned %>%
+#   select(everything()) %>%
+#   summarise_all(funs(sum(is.na(.)))) %>% rowSums()
 ```
 
-![The plot with potential outliers](img/Outliers.png)
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=20,fig.height=8}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=8,fig.height=8}
 # PART 2: PCA
 library(pryr)
 library(ggbiplot) #if the library is not present use the code below
@@ -43,16 +43,16 @@ source('PCA.R')
 # PART 3: Hierarchical Clustering between Continents
 library(ape)
 source('cluster_continents.R')
-(Cl_continents <- cluster_continents(cleaned))
+Cl_continents <- cluster_continents(cleaned)
 ```
 
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=15,fig.height=10}
-# PART 4: K-means Clustering between Countries
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+# PART 4: K-means & Model Based Clustering between Countries
+library(mclust)
 library(maptools)
 source('clusters_countries.R')
-(Cl_countries <- clusters_countries(cleaned))
+Cl_countries <- clusters_countries(cleaned)
 #Show Centers
-Cl_countries[2]
 ```
 

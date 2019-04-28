@@ -30,12 +30,12 @@ hc <- hclust(distance, "single")
 #plot(hc, main="Distance between Continents")
 
 #Plot Clusters
-cluster_plot %<a-% plot(as.phylo(hc), type = "cladogram", cex = 0.8,
+cluster_plot <-  plot(as.phylo(hc), type = "cladogram", cex = 0.8,
      edge.color = "steelblue", edge.width = 2, edge.lty = 2,
-     tip.color = "steelblue")
+     tip.color = "steelblue", main='Clusters between Continents')
 
 # Check clusters by scree plot
-scree_plot %<a-%plot(rev(hc$height))
+#scree_plot <-  plot(rev(hc$height)) # uncomment to check
 
 cutree(hc,3)
 #Scree plot support the idea of 3 clusters
@@ -44,5 +44,5 @@ cutree(hc,3)
 #2: Asia & Central Ameica
 #3: South America, Europe, North America
 
-return(cluster_plot)
+return()
 }

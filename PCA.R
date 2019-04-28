@@ -42,7 +42,6 @@ summary(pca, loadings=T)
 #library(ggbiplot)
 plot.pca <- prcomp(data2[,c(-1,-2)], scale. = TRUE)
 plot.pca2 <- plot.pca
-plot.pca2$
 
 PCA_plot %<a-% ggbiplot(plot.pca, obs.scale = 1, var.scale = 1,varname.size = 3,
          groups = data2$continent, ellipse = TRUE) +

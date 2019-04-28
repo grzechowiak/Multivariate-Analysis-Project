@@ -6,6 +6,7 @@ Module 5: EFA
 
 Module 6: Clustering - between countires
 - make hierarchical for countries, look how it looks like
+- do model based clustering and compare results with k-means
 
 Module 7: CFA
 
