@@ -48,6 +48,11 @@ PCA_plot %<a-% ggbiplot(plot.pca, obs.scale = 1, var.scale = 1,varname.size = 3,
   scale_color_discrete(name = 'Continents:') +
   theme(legend.direction = 'horizontal', legend.position = 'top')
 
+PCA_plot1 %<a-% ggbiplot(plot.pca, choices = c(1,3), obs.scale = 1, var.scale = 1,varname.size = 3,
+                        groups = data2$continent, ellipse = TRUE) +
+  scale_color_discrete(name = 'Continents:') +
+  theme(legend.direction = 'horizontal', legend.position = 'top')
+
 #PC1 the highest
 tail(sort(pca$scores[,1]),6)
 #PC2 the highest
@@ -63,5 +68,6 @@ tail(sort(pca$scores[,3]),6)
 #Source of biplot:
 #https://github.com/vqv/ggbiplot
 
-return(PCA_plot)
+ret <- list(PCA_plot, PCA_plot1)
+return(ret)
 }
