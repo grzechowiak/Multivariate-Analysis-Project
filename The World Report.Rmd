@@ -6,11 +6,11 @@ output:
   html_document: default
   word_document: default
 ---
-#Introduction:
+#I. Introduction:
 Team clearly described the dataset and clearly described the motivation behind studying the data. Team provided
 scholarly citations or quantitative facts to describe the motivation.
 
-#Data Cleaning and Outlier Visualization:
+#II. Data Cleaning and Outlier Visualization:
 Team clearly described their data cleaning and outlier removal process. Team presented insightful visualizations
 motivating to do further exploratory or confirmatory analysis.
 
@@ -24,19 +24,18 @@ library(car)
 
 source('Read_Clean.R')
 cleaned <- Read_Clean()
-
-#After Cleaning, check how many NA values are in dataset.
-# cleaned %>%
-#   select(everything()) %>%
-#   summarise_all(funs(sum(is.na(.)))) %>% rowSums()
 ```
-#Dimension Reduction Analysis: 
+
+
+
+
+#III. Dimension Reduction Analysis: 
 Team applied dimension reduction analysis correctly and discussed the
 motivation behind that. Also, they provided interesting insights into the
 results.
 
-Part A: MDS
--Clusters
+##Part A: MDS
+-we can see Clusters
 -Asia: we can see is the most spread out and has the most outliers, spreads across Africa to Europe 
 -Africa is the opposite of Europe
 -South America and North America are similar
