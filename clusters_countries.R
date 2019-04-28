@@ -102,6 +102,7 @@ centers <- km$centers
 #library(mclust)
 
 #Perform Model based Clustering
+set.seed(123)
 mc <- Mclust(cleaned[,c(-1,-2)])
 
 cat("\014") ## just a trick to clean a console. In order to avoid annoying R Console info
