@@ -1,14 +1,11 @@
 
-#CFA <- function(data_input=NULL) {
-#}
-#CFA(cleaned)
-#http://www.statpower.net/Content/312/Handout/Confirmatory%20Factor%20Analysis%20with%20R.pdf
-#####with 2 factors
 library(sem)
-cfa_data <- cleaned
-cfa_data <- cfa_data[,c(-1,-2,-4,-5,-9,-11,-15,-16,-17)]
-colnames(cfa_data)
+library(readr)
 
+cfa_data <- read_csv("cor_data.csv")
+cfa_data <- cfa_data[,c(-1)]
+class(cfa_data[1,1])
+row.names(cfa_data) <- colnames(cfa_data) 
 cfa_model <- specifyModel(text = "
                           Factor1          -> phones_p100, lambda1, NA              
                           Factor1          -> life_exp_yrs, lambda2, NA  
@@ -29,7 +26,7 @@ cfa_model <- specifyModel(text = "
                           pop_total        <-> pop_total, theta8, NA
                           Factor1          <-> Factor1, NA, 1
                           Factor2          <-> Factor2, NA, 1")
-cfa_sem <- sem(cfa_model, cor(cfa_data), nrow(cfa_data))
+cfa_sem <- sem(cfa_model, cfa_data, 195, debug = T)
 summary(cfa_sem)
 
 

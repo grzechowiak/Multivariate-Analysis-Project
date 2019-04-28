@@ -1,8 +1,4 @@
 ######## TO DO: #########
-Module 1: Cleaning data:
-For each column, group by continent and put median into NAs
-
-Module 2: Find outliers: boxplots, bivariate plots.
 
 Module 3: Present hight PC1, PC2 on the map, coloring countires
 
@@ -10,14 +6,17 @@ Module 5: EFA
 
 Module 6: Clustering - between countires
 - make hierarchical for countries, look how it looks like
-- make k-means for countries and interprete it by PCA or centers
-- plot a map for each group
 
 Module 7: CFA
 
 
 
 ####### DONE: ########
+Module 1: Cleaning data:
+For each column, group by continent and put median into NAs
+
+Module 2: Find outliers: boxplots, bivariate plots.
+
 Module 3. PCA : Asia is the most diverse continent. Africa the biggest in 
  child mortality and child per woman
 
@@ -32,3 +31,6 @@ rather poor, so it's classified on the same lvl as Africa
 #https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita#/media/File:GDP_per_capita_(nominal)_2015.png
 #https://en.wikipedia.org/wiki/List_of_Oceanian_countries_by_GDP_(nominal)
 
+Module 6: Clustering - between countires
+- make k-means for countries and interprete it by PCA or centers
+- plot a map for each grou

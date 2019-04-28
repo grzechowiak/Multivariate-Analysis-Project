@@ -12,10 +12,10 @@ find_EFA <- function(data_input=NULL) {
   data <- cleaned
   num_data <- data[, c(-1,-2)]
   corr <- cor(num_data)
-  print(factor_rms(num_data, 1, corr))
-  print(factor_rms(num_data, 2, corr))
-  print(factor_rms(num_data, 3, corr))
-  print(factor_rms(num_data, 4, corr))
+  factor_rms(num_data, 1, corr)
+  factor_rms(num_data, 2, corr)
+  factor_rms(num_data, 3, corr)
+  factor_rms(num_data, 4, corr)
 }
 
 EFA <- function(data_input=NULL) {
@@ -46,15 +46,14 @@ EFA <- function(data_input=NULL) {
   data(wrld_simpl)
   
   country_colors <- setNames(rep("white", length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
-  country_colors[wrld_simpl@data$NAME %in% gr1] <- "red"
-  country_colors[wrld_simpl@data$NAME %in% gr2] <- "blue"
-  country_colors[wrld_simpl@data$NAME %in% gr3] <- "green" #Singapore, Qatar, Luxembourg & Bunei are too small to observe in graph
-  country_colors[wrld_simpl@data$NAME %in% gr4] <- "yellow"
-  
+  country_colors[wrld_simpl@data$NAME %in% gr1] <- "#3288bd"
+  country_colors[wrld_simpl@data$NAME %in% gr2] <- "#fc8d59"
+  country_colors[wrld_simpl@data$NAME %in% gr3] <- "#91cf60" #Singapore, Qatar, Luxembourg & Bunei are too small to observe in graph
+  country_colors[wrld_simpl@data$NAME %in% gr4] <- "#fee08b"
+  colors <- c("#3288bd", "#fc8d59", "#91cf60", "#fee08b")
   sort(wrld_simpl@data$NAME)
   plot(wrld_simpl, col = country_colors)
-  legend(3.9,6.1, fill=colors, legend=), col=colors, cex=0.5)
+  legend("bottomleft", fill=colors, legend=c("Developed", "Crowded", "Inequality", "Gender/Income"), col=colors, cex=0.5)
   
 }  
-find_EFA(cleaned)
-EFA(cleaned)
+

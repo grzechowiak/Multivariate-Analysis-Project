@@ -11,7 +11,7 @@ The project...
 
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-#PART 1: Read csv, merge, clean.
+#PART 1: Read csv, merge, clean and plot outliers.
 library(readr)
 library(readxl)
 library(dplyr)
@@ -19,9 +19,14 @@ library(countrycode)
 
 source('Read_Clean.R')
 cleaned <- Read_Clean()
+
+#After Cleaning, check how many NA values are in dataset.
+cleaned %>%
+  select(everything()) %>%
+  summarise_all(funs(sum(is.na(.)))) %>% rowSums()
 ```
 
-
+The plot with potential outliers](img/Outliers.png)
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=20,fig.height=8}
 # PART 2: PCA
