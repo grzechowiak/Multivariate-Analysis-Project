@@ -1,11 +1,11 @@
 
 library(sem)
-library(readr)
-
-cfa_data <- read_csv("cor_data.csv")
-cfa_data <- cfa_data[,c(-1)]
-class(cfa_data[1,1])
-row.names(cfa_data) <- colnames(cfa_data) 
+library(dplyr)
+cfa_data <- readRDS("my_cor.rds")
+cfa_data <- cfa_data[,c(-1,-2,-4,-5,-9,-11,-15,-16,-17)]
+cfa_data <- select(cfa_data, 'phones_p100', 'life_exp_yrs', 'corruption_CPI', 
+                   'internet_%of_pop', 'children_p_woman', 'child_mort_p1000', 'urban_pop_tot', 'pop_total')
+as.data.frame(cfa_data)
 cfa_model <- specifyModel(text = "
                           Factor1          -> phones_p100, lambda1, NA              
                           Factor1          -> life_exp_yrs, lambda2, NA  
@@ -33,4 +33,4 @@ summary(cfa_sem)
 
 
 cor_data <- cor(cfa_data[,c(-1,-2)])
-saveRDS(cor_data, file = "my_cor.rds")
+
