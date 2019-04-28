@@ -1,9 +1,16 @@
+#What is inside:
+#The function receives cleaned data perform k-means & mode based
+#clustering between countries.
+
+clusters_countries <- function(data_input=NULL) {
+  
+
 ########################################################
-#### COMPUTING THE DISTANCE BETWEEN COUNTRIES ####
+################ K- MEANS CLUSTERS  ####################
 ########################################################
 
 #Copy data
-clus_coun <- data
+clus_coun <- cleaned
 row.names(clus_coun) <- clus_coun$country
 #delete columns: country, continent
 clus_coun[c(1,2)] <- NULL
@@ -21,10 +28,11 @@ plot.wgss = function(mydata, maxc) {
 }
 
 #Check # of cluster
-plot.wgss(clus_coun, 20)
+#scree_plot2 <- plot.wgss(clus_coun, 20)
 # Plots shows around 7 clausters
 
 #Perform clustering
+set.seed(123)
 km <- kmeans(clus_coun, centers=6, nstart = 20)
 table(km$cluster)
 
@@ -60,32 +68,124 @@ gr6$country <- rownames(gr6)
 gr6 <- as.vector(unlist(gr6$country))
 
 
-
-library(maptools)
+# Plot all groups on the one map
+#library(maptools)
 data(wrld_simpl)
 
+#Specify Columns per group
 country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
-country_colors[wrld_simpl@data$NAME %in% gr1] <- "#d53e4f"
-country_colors[wrld_simpl@data$NAME %in% gr2] <- "#fc8d59"
-country_colors[wrld_simpl@data$NAME %in% gr3] <- "#fee08b"
-country_colors[wrld_simpl@data$NAME %in% gr4] <- "#e6f598"
-country_colors[wrld_simpl@data$NAME %in% gr5] <- "#99d594"
-country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd"
+country_colors[wrld_simpl@data$NAME %in% gr1] <- "#80cdc1" #green "Income/Gender"
+country_colors[wrld_simpl@data$NAME %in% gr2] <- "#d53e4f" #red Poor/Corrupted
+country_colors[wrld_simpl@data$NAME %in% gr3] <- "#91cf60" #light green  "Developed"
+country_colors[wrld_simpl@data$NAME %in% gr4] <- "#fc8d59" #orange "Low birthrate
+country_colors[wrld_simpl@data$NAME %in% gr5] <- "#fee08b"  #yellow  "Inequality"
+country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd" #blue  "Crowded"
 
-group <- c('1','2','3','4','5','6')
-color <- c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#99d594","#3288bd")
-col_gr <- data.frame(group, color)
+#Plot the map
+Cl_countries <-  plot(wrld_simpl, col = country_colors) 
+Cl_countries <- Cl_countries + title(main=paste("K-Means Clustering")) 
+Cl_countries <- Cl_countries <- legend(x=-180,y=15, inset=.09, title="",
+            c("Income/Gender","Poor/Corrupted","Developed", "Low birthrate","Inequality","Crowded","NoData"),
+            fill=c("#80cdc1","#d53e4f", "#91cf60", "#fc8d59","#fee08b","#3288bd", gray(.80)),
+            horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
 
 
-sort(wrld_simpl@data$NAME)
-plot(wrld_simpl, col = country_colors)
-title(main=paste("Clusters of Countries"))
-legend("topleft", inset=.1, title="Clusters",
-       c("1", "2","3", "4","5", "6"), 
-       fill=c("#d53e4f", "#fc8d59", "#fee08b","#e6f598","#99d594","#3288bd"), 
-       horiz=FALSE, cex=0.5)
+centers <- km$centers
 
-library(maptools)
+
+
+
+
+########################################################
+################ MODEL BASED CLUSTERS  #################
+########################################################
+
+#library(mclust)
+
+#Perform Model based Clustering
+set.seed(123)
+mc <- Mclust(cleaned[,c(-1,-2)])
+
+cat("\014") ## just a trick to clean a console. In order to avoid annoying R Console info
+# in Rmarkdown information.
+
+#Check summary
+summary(mc)
+
+#Match clusters with country names and transfer into df
+mc_groups <- cbind(mc$classification, cleaned$country)
+mc_groups <- as.data.frame(mc_groups)
+colnames(mc_groups) <- c("group", "country")
+
+#Create new df for each group and save as a list 
+gr1.mc <- filter(mc_groups, group==1)
+gr1.mc <- as.vector(unlist(gr1.mc$country))
+
+gr2.mc <- filter(mc_groups, group==2)
+gr2.mc <- as.vector(unlist(gr2.mc$country))
+
+gr3.mc <- filter(mc_groups, group==3)
+gr3.mc <- as.vector(unlist(gr3.mc$country))
+
+gr4.mc <- filter(mc_groups, group==4)
+gr4.mc <- as.vector(unlist(gr4.mc$country))
+
+gr5.mc <- filter(mc_groups, group==5)
+gr5.mc <- as.vector(unlist(gr5.mc$country))
+
+gr6.mc <- filter(mc_groups, group==6)
+gr6.mc <- as.vector(unlist(gr6.mc$country))
+
+gr7.mc <- filter(mc_groups, group==7)
+gr7.mc <- as.vector(unlist(gr7.mc$country))
+
+
+#library(maptools)
 data(wrld_simpl)
-myCountries = wrld_simpl@data$NAME %in% c("Australia", "United Kingdom", "Germany", "United States", "Sweden", "Netherlands", "New Zealand")
-plot(wrld_simpl, col = c(gray(.80), "red")[myCountries+1])
+#Specify Columns per group
+country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
+country_colors[wrld_simpl@data$NAME %in% gr1.mc] <- "#d53e4f" #red "Poor/Corrupted"
+country_colors[wrld_simpl@data$NAME %in% gr2.mc] <- "#41ab5d" #MIDDLE green "Developed"
+country_colors[wrld_simpl@data$NAME %in% gr3.mc] <- "#c7e9c0" #LEAST green   "Semi-Developed"
+country_colors[wrld_simpl@data$NAME %in% gr4.mc] <- "#fb590e" #orange "Not Crowded"
+country_colors[wrld_simpl@data$NAME %in% gr5.mc] <- "#006d2c" #MOST green  "Highly Developed"
+country_colors[wrld_simpl@data$NAME %in% gr6.mc] <- "#fee08b" #yellow  "Unequal/Corrupted"
+country_colors[wrld_simpl@data$NAME %in% gr7.mc] <- "#f1a340" #orange  "Urban Population/Phones"
+
+#Plot the map
+Cl_countries.mc <-  plot(wrld_simpl, col = country_colors) 
+Cl_countries.mc <- Cl_countries.mc + title(main=paste("Model Based Clustering")) 
+Cl_countries.mc <- Cl_countries.mc <- legend(x=-180,y=15, inset=.09, title="",
+                                       c("Poor/Corrupted","Developed","Semi-Developed","Low population","Highly Developed","Unequal/Corrupted","Urban Population/Phones","NoData"), 
+                                       fill=c("#d53e4f","#41ab5d", "#c7e9c0", "#fb590e","#006d2c","#fee08b" ,"#f1a340", gray(.80)), 
+                                       horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
+
+
+
+
+## Centroids to interprete the clusters
+round(t(mc$parameters[["mean"]]),3)
+
+#group 7
+round(t(mc$parameters[["mean"]][,7]),3)
+
+
+#COMPARE
+#model based
+chisq.test(table(cleaned[,1], mc$classification))
+table(cleaned[,1], mc$classification)
+
+table(cleaned[,1])
+table(mc$classification)
+
+#k-means
+chisq.test(table(cleaned[,1], km$cluster))
+table(cleaned[,1], km$cluster)
+
+table(cleaned[,1])
+table(km$cluster)
+
+ToReturn <- list(Cl_countries, Cl_countries.mc) # Return two objects: Plot and Centers to interpret the plot
+
+return()
+}

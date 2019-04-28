@@ -1,7 +1,12 @@
-#Read Libraries
-library(readr)
-library(readxl)
-library(dplyr)
+
+#What is inside:
+# The function, read all csv files and merge them together. Later a new column 
+# "continent" is created based on the column "country". On the end that is cleaned.
+
+Read_Clean <- function(data_input=NULL){
+
+
+  
 
 ######## ######## ######## ######## ######## 
 ########## READ ALL DATA AND MERGE ########## 
@@ -130,13 +135,14 @@ data <- merge(data, gini, by="country", all=TRUE)
 
 
 
+
 ######## ######## ######## ######## ######## 
 ######## NEW COLUMN - CONTINENT ######## 
 ######## ######## ######## ######## ######## 
 
 # Create new a column continent and divide countires by continent
 
-library(countrycode)
+#library(countrycode)
 data$continent <- countrycode(sourcevar = data[, "country"],
                               origin = "country.name",
                               destination = "continent")
@@ -162,11 +168,117 @@ for (i in 1:nrow(data)){
 
 
 
-######## ######## ######## ######## ######## 
-######## INSERT MEDIAN ######## 
-######## ######## ######## ######## ######## 
 
 
-for(q in 1:ncol(data)){
-  data[is.na(data[, q]), q] <- median(data[, q], na.rm = TRUE) 
+######## ######## ######## ######## ######## 
+######## DATA CLEANING INSERT MEDIAN ######## 
+######## ######## ######## ######## ######## 
+
+#Each NA value is replaced by the median value for the continent. 
+
+#make a list of column names
+col_names <- as.vector(names(data))
+
+#Group by continent and find median
+x <- aggregate(. ~ continent, data=data[,c(-2)], FUN=median)
+
+#Create a sign for opposite of %in%
+'%ni%' <- Negate('%in%')
+
+#Iterate thru columns and row. If NA spotted insert median, depending on continent.
+for(i in 1:length(col_names)){
+  if (col_names[i] %ni% c("continent","country")) {
+    
+    for (j in 1:nrow(data)){
+      if(is.na(data[j,i])){
+        data[j,i] <- x[x$continent==data$continent[j],i-1]
+      }
+    }
+  }
 }
+
+
+
+
+
+######## ######## ######## ######## ######## 
+############# CHECKING OUTLIERS ############# 
+######## ######## ######## ######## ######## 
+
+##Check by Boxplots
+
+#library(car)
+layout(matrix(c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15), nrow = 3, ncol = 5, byrow = TRUE))
+
+#Pop_Total Column
+with(data, Boxplot(pop_total, id=list(labels=data$country),main="Population Total"))
+
+#Murder_PP Column
+with(data, Boxplot(murder_pp, id=list(labels=data$country),main="Murder Per Person"))
+
+#Armed_PP Column
+with(data, Boxplot(armed_pp, id=list(labels=data$country),main="Armed Per Person"))
+
+#Phones_p100 Column
+with(data, Boxplot(phones_p100, id=list(labels=data$country),main="Phones Per 100 People"))
+
+#children_p_woman Column
+with(data, Boxplot(children_p_woman, id=list(labels=data$country),main="Children Per Woman"))
+
+#Life_Exp_Yrs Column
+with(data, Boxplot(life_exp_yrs, id=list(labels=data$country),main="Life Expectancy in Years"))
+
+#Suicide_PP Column
+with(data, Boxplot(suicide_pp, id=list(labels=data$country),main="Suicide Per Person"))
+
+#Urban_Pop_Tot Column
+with(data, Boxplot(urban_pop_tot, id=list(labels=data$country),main="Urban Population Total"))
+
+#Sex_Ratio_p100
+with(data, Boxplot(sex_ratio_p100, id=list(labels=data$country),main="Sex Ratio Per 100 People"))
+
+#Corruption_CPI
+with(data, Boxplot(corruption_CPI, id=list(labels=data$country),main="Corruption CPI Index"))
+
+#Internet_%0f_pop
+with(data, Boxplot(`internet_%of_pop`, id=list(labels=data$country),main="Internet Usage Perceantage of Population"))
+
+#child_mort_p1000
+with(data, Boxplot(child_mort_p1000, id=list(labels=data$country),main="Child Mortality Rate per 1000"))
+
+#income_per_person
+with(data, Boxplot(income_per_person, id=list(labels=data$country),main="Income Per Person"))
+
+#investments_per_ofGDP
+with(data, Boxplot(investments_per_ofGDP, id=list(labels=data$country),main="Investments Percentage of GDP"))
+
+#Gini
+with(data, Boxplot(gini, id=list(labels=data$country),main="GINI Ratio"))
+
+
+
+## Check by Histograms
+
+# uncomment to check histograms:
+
+# hist(data$pop_total)
+# hist(data$murder_pp)
+# hist(data$armed_pp)
+# hist(data$phones_p100)
+# hist(data$children_p_woman)
+# hist(data$life_exp_yrs)
+# hist(data$suicide_pp)
+# hist(data$urban_pop_tot)
+# hist(data$sex_ratio_p100)
+# hist(data$corruption_CPI)
+# hist(data$`internet_%of_pop`)
+# hist(data$child_mort_p1000)
+# hist(data$income_per_person)
+# hist(data$investments_per_ofGDP)
+# hist(data$gini)
+
+
+
+
+return(data)
+} #end of the function

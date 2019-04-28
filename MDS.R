@@ -1,5 +1,6 @@
 
-#apply MDS to all data 
+#apply MDS to all data
+data <- cleaned
 data.s <- scale(data[, c(-1,-2)])
 d <- dist(data.s)       
 cmd <- cmdscale(d, k=5, eig = T)
@@ -33,12 +34,12 @@ for(i in 1:frames){
   
   png(name)
   scatterplot3d(cmd,
-                main=paste("Angle", i),
+                main="MDS Continents",
                 angle=i,
                 pch=16,
                 cex.axis = 1,
                 color=colors_data)
-  legend(3.9,6.1, fill=colors, legend=levels(factor(data$continent)), col=colors, cex=0.8)
+  legend("bottomleft", fill=colors, legend=levels(factor(data$continent)), col=colors, cex=0.8)
   
   dev.off()
 }
@@ -48,8 +49,7 @@ system(my_command)
 my_command <- 'rm *.png'
 system(my_command)
 
-
-
+#convert 3d.gif -density 50 -quality 50 mds2.gif
 
 
 #group by continent and apply MDS
