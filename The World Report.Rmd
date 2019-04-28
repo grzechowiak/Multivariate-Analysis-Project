@@ -36,6 +36,11 @@ motivation behind that. Also, they provided interesting insights into the
 results.
 
 Part A: MDS
+-Clusters
+-Asia: we can see is the most spread out and has the most outliers, spreads across Africa to Europe 
+-Africa is the opposite of Europe
+-South America and North America are similar
+-
 ```{r}
 #PART 2: MDS
 ```
