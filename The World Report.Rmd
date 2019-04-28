@@ -3,8 +3,8 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
   word_document: default
 ---
 #I. Introduction:
@@ -47,8 +47,9 @@ results.
 ```
 ![image](img/3d.gif)
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=8,fig.height=8}
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 # PART 3: PCA
+library(maptools)
 library(pryr)
 library(ggbiplot) #if the library is not present use the code below
 #library(devtools)
@@ -89,7 +90,6 @@ South, North and Europe are very similar. AND C America, Asia, Oceania and Afric
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 # PART 4: K-means & Model Based Clustering between Countries
 library(mclust)
-library(maptools)
 source('clusters_countries.R')
 Cl_countries <- clusters_countries(cleaned)
 ```

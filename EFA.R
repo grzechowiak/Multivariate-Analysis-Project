@@ -54,7 +54,7 @@ EFA <- function(data_input=NULL) {
   sort(wrld_simpl@data$NAME)
   EFA_plot <- plot(wrld_simpl, col = country_colors)
   EFA_plot <-  legend(x=-180,y=15, inset=.09, title="",
-                       fill=colors, legend=c("Developed", "Crowded", "Inequality", "Gender/Income", 'No Data'), 
+                       fill=colors, legend=c("Developed", "Crowded", "High Inequality", "Gender/Income", 'NoData'), 
                       horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
   
   
