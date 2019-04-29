@@ -124,10 +124,62 @@ pop_total murder_pp armed_pp phones_p100 children_p_woman life_exp_yrs suicide_p
 
 
 # V. Exploratory Factor Analysis -MIKA
+In order to find the number of factors, EFA was performed starting with 1 factor, increasing the number of factors until getting a value for RMSE lower than 0.05. Therefore, it was concluded that the optimal number of factors is four. Performing EFA with 4 factors, the loadings are:    
+
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+  
 #PART 5: EFA
 source('EFA.R')
-EFA(cleaned)
+EFA_loadings(cleaned)
+```
+From the loadings it can be interpreted:   
+1.	Factor 1 has high life expectancy, internet access, balanced income per person and it is low in child mortality and children per women. For these reasons, represents the level of development of the country. 
+2.	Factor 2 represents the level of population.
+3.	Factor 3 represents inequality and murder. 
+4.	Factor 4 represents the level of income related with the amount of men and women that the country has. 
+In order to visualize these four factors graphically, the top 10 for each factor’s scores was taken and create four groups of countries, where each factor has more relevance. The groups of countries are named according with the meaning of each factor as follows: 
+Factor 1 -> Developed 
+Factor 2 -> Crowed 
+Factor 3 -> Inequality
+Factor 4 -> Gender/Income 
+These can be visualized in the following graph: 
+
+
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+source('EFA.R')
+groups = EFA_plot(cleaned)
+```
+
+Note: There are some countries such as Singapore or Qatar that are in the groups but are too small to show in the map. 
+
+The countries in group 1 are:  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
+library(knitr)
+print(groups[1])
+```
+
+The countries in group 2 are:  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
+library(knitr)
+print(groups[2])
+```
+
+
+The countries in group 3 are:  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
+library(knitr)
+print(groups[3])
+```
+
+The countries in group 4 are:  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
+library(knitr)
+print(groups[4])
 ```
 
 #VI. Confirmatory Factor Analysis -> Mika put links
