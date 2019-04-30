@@ -30,9 +30,9 @@ hc <- hclust(distance, "single")
 #plot(hc, main="Distance between Continents")
 
 #Plot Clusters
-cluster_plot <-  plot(as.phylo(hc), type = "cladogram", cex = 0.8,
-     edge.color = "steelblue", edge.width = 2, edge.lty = 2,
-     tip.color = "steelblue", main='Hierarchical Clustering Between Continents')
+cluster_plot <-  plot(as.phylo(hc), type = "cladogram", cex = 2,
+     edge.color = "black", edge.width = 2, edge.lty = 2,
+     tip.color = "black", cex.main=1.5, main='Hierarchical Clustering Between Continents')
 
 # Check clusters by scree plot
 #scree_plot <-  plot(rev(hc$height)) # uncomment to check

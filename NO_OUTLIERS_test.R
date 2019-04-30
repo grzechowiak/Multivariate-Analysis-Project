@@ -32,3 +32,5 @@ for(q in 1:ncol(no_out)){
   no_out[is.na(no_out[, q]), q] <- median(no_out[, q], na.rm = TRUE) 
 }
 summary(no_out)
+
+saveRDS(no_out, file = "forMika.rds")
