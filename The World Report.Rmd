@@ -139,16 +139,14 @@ Note: from the analysis columns such as Population total, number of murder, numb
 
 #IV. CLUSTERING - ROGELIO
 #### PART A: Hierarchical Clustering between Continents
-
+The hierarchical clustering model explains that the data has two main clusters.  Looking at the model the first cluster includes Africa, Oceania, Asia & Central America and the second includes South America, Europe, North America. What is interesting about this clustering is that Africa is clustered with Oceania which includes Australia and New Zealand.  The reason this is interesting is the fact that Australia and New Zealand are considered highly developed, but they are grouped with the entire African continent.  This is more than likely due to the reason that Oceania also has many small islands included in the continent that are not as developed which causes the grouping with Africa.
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=11,fig.height=7}
 # PART 3: Hierarchical Clustering between Continents
 library(ape)
 source('cluster_continents.R')
 Cl_continents <- cluster_continents(cleaned)
 ```
-Include all variables
 
-South, North and Europe are very similar. AND C America, Asia, Oceania and Africa are similar. Interesting is Africa is clustered with Oceania (with include Australia and NZ but also many small island which push Oceania into level of Africa)
 
 
 #### PART B: K-means and Model-Based clustering between Conutries
