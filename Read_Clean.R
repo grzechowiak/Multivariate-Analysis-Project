@@ -208,46 +208,16 @@ for(i in 1:length(col_names)){
 ##Check by Boxplots
 
 #library(car)
+# uncomment in order to get a matrix with all boxplots
 #layout(matrix(c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15), nrow = 3, ncol = 5, byrow = TRUE))
+
+
 par(mfrow=c(1,5))
 #Pop_Total Column
 with(data, Boxplot(pop_total, id=list(labels=data$country),main="Population Total"))
 
-#Murder_PP Column
-with(data, Boxplot(murder_pp, id=list(labels=data$country),main="Murder Per Person"))
-
-#Armed_PP Column
-with(data, Boxplot(armed_pp, id=list(labels=data$country),main="Armed Per Person"))
-
-#Phones_p100 Column
-with(data, Boxplot(phones_p100, id=list(labels=data$country),main="Phones Per 100 People"))
-
-#children_p_woman Column
-with(data, Boxplot(children_p_woman, id=list(labels=data$country),main="Children Per Woman"))
-
-par(mfrow=c(1,5))
-#Life_Exp_Yrs Column
-with(data, Boxplot(life_exp_yrs, id=list(labels=data$country),main="Life Expectancy in Years"))
-
-#Suicide_PP Column
-with(data, Boxplot(suicide_pp, id=list(labels=data$country),main="Suicide Per Person"))
-
-#Urban_Pop_Tot Column
-with(data, Boxplot(urban_pop_tot, id=list(labels=data$country),main="Urban Population Total"))
-
-#Internet_%0f_pop
-with(data, Boxplot(`internet_%of_pop`, id=list(labels=data$country),main="Internet Usage Perceantage of Population"))
-
-#Corruption_CPI
-with(data, Boxplot(corruption_CPI, id=list(labels=data$country),main="Corruption CPI Index"))
-
-
-par(mfrow=c(1,5))
 #Sex_Ratio_p100
 with(data, Boxplot(sex_ratio_p100, id=list(labels=data$country),main="Sex Ratio Per 100 People"))
-
-#child_mort_p1000
-with(data, Boxplot(child_mort_p1000, id=list(labels=data$country),main="Child Mortality Rate per 1000"))
 
 #income_per_person
 with(data, Boxplot(income_per_person, id=list(labels=data$country),main="Income Per Person"))
@@ -257,6 +227,42 @@ with(data, Boxplot(investments_per_ofGDP, id=list(labels=data$country),main="Inv
 
 #Gini
 with(data, Boxplot(gini, id=list(labels=data$country),main="GINI Ratio"))
+
+
+
+#Below are rest of the boxplot, but we just want to present an example
+# par(mfrow=c(1,5))
+# #child_mort_p1000
+# with(data, Boxplot(child_mort_p1000, id=list(labels=data$country),main="Child Mortality Rate per 1000"))
+# 
+# #Murder_PP Column
+# with(data, Boxplot(murder_pp, id=list(labels=data$country),main="Murder Per Person"))
+# 
+# #Armed_PP Column
+# with(data, Boxplot(armed_pp, id=list(labels=data$country),main="Armed Per Person"))
+# 
+# #Phones_p100 Column
+# with(data, Boxplot(phones_p100, id=list(labels=data$country),main="Phones Per 100 People"))
+# 
+# #children_p_woman Column
+# with(data, Boxplot(children_p_woman, id=list(labels=data$country),main="Children Per Woman"))
+# 
+# par(mfrow=c(1,5))
+# #Life_Exp_Yrs Column
+# with(data, Boxplot(life_exp_yrs, id=list(labels=data$country),main="Life Expectancy in Years"))
+# 
+# #Suicide_PP Column
+# with(data, Boxplot(suicide_pp, id=list(labels=data$country),main="Suicide Per Person"))
+# 
+# #Urban_Pop_Tot Column
+# with(data, Boxplot(urban_pop_tot, id=list(labels=data$country),main="Urban Population Total"))
+# 
+# #Internet_%0f_pop
+# with(data, Boxplot(`internet_%of_pop`, id=list(labels=data$country),main="Internet Usage Perceantage of Population"))
+# 
+# #Corruption_CPI
+# with(data, Boxplot(corruption_CPI, id=list(labels=data$country),main="Corruption CPI Index"))
+
 
 
 
