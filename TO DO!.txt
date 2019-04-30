@@ -1,8 +1,4 @@
 ######## TO DO: #########
-Module 1: Cleaning data:
-For each column, group by continent and put median into NAs
-
-Module 2: Find outliers: boxplots, bivariate plots.
 
 Module 3: Present hight PC1, PC2 on the map, coloring countires
 
@@ -14,6 +10,7 @@ Module 5: EFA
 
 Module 6: Clustering - between countires
 - make hierarchical for countries, look how it looks like
+<<<<<<< HEAD
 - make k-means for countries and interprete it by PCA or centers
 - plot a map for each group
 Group1: high in murder and gini indicating high inequality leading to more murders
@@ -23,12 +20,20 @@ Group4: Developed countries *high in suicide may be caused by developments in ph
 Group5: Big countries in both tot_pop & urban_pop 
 (0.5 is something worth mentioning)
 Group6: Poor countries (Mainly african countries) no internet, small population, lots of children per women, child mortality is high etc.
+=======
+>>>>>>> 8fcdb56ebab5c31178109455c11232d8488129dc
 
+ 
 Module 7: CFA
 
 
 
 ####### DONE: ########
+Module 1: Cleaning data:
+For each column, group by continent and put median into NAs
+
+Module 2: Find outliers: boxplots, bivariate plots.
+
 Module 3. PCA : Asia is the most diverse continent. Africa the biggest in 
  child mortality and child per woman
 
@@ -45,3 +50,9 @@ rather poor, so it's classified on the same lvl as Africa
 #https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)_per_capita#/media/File:GDP_per_capita_(nominal)_2015.png
 #https://en.wikipedia.org/wiki/List_of_Oceanian_countries_by_GDP_(nominal)
 
+Module 6: Clustering - between countires
+- make k-means for countries and interprete it by PCA or centers
+- plot a map for each grou
+- do model based clustering
+- Match colors for k-means & model based
+- compare results k-means with model based
