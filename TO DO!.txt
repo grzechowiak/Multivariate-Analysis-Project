@@ -1,6 +1,7 @@
 ######## TO DO: #########
 
-Module 3: Present hight PC1, PC2 on the map, coloring countires
+MODULE1:
+find scholar papers
 
 Module 5: EFA
 -Factor1: Developed countries, higher developed countries with more internet, phones, low mortality in children, low children per woman
@@ -36,6 +37,9 @@ Module 2: Find outliers: boxplots, bivariate plots.
 
 Module 3. PCA : Asia is the most diverse continent. Africa the biggest in 
  child mortality and child per woman
+ 
+Module 3: Present hight PC1, PC2 on the map, coloring countires
+
 
 Module 4. MDS: Asia again is the most diverse. Africa is opposite than Europe
 USA and Canada s closer to Europe. Mexico closer to Central America

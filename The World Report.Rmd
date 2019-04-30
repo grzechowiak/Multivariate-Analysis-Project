@@ -110,7 +110,7 @@ In order to present the PCA result, two graphs were displayed below. Ellipses we
 PrinCompPlot[1]
 ```
 
-*Plot PC2 vs PC3* 
+*Plot PC1 vs PC3* 
 <br/>
 The second plot shows that very high inequality is presented especially in South America and Africa
 <br/>
@@ -251,6 +251,8 @@ print(groups[4])
 
 #VII. Conclusion ->
 <!-- Team presented meaningful findings and discussed the pros and cons of their study. Team suggested some future works for post analysis. -->
+
+Because of big differences
 
 
 #VIII. Appendix
