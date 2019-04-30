@@ -3,9 +3,27 @@
 Module 3: Present hight PC1, PC2 on the map, coloring countires
 
 Module 5: EFA
+-Factor1: Developed countries, higher developed countries with more internet, phones, low mortality in children, low children per woman
+-Factor2: Populated countries, obviously more population
+-Factor3: Income/Gender, more men and more income
+-Factor4: Gini/Murder, Higher inequality leading to more murder
 
+Module 6: Clustering - between countires
+- make hierarchical for countries, look how it looks like
+<<<<<<< HEAD
+- make k-means for countries and interprete it by PCA or centers
+- plot a map for each group
+Group1: high in murder and gini indicating high inequality leading to more murders
+Group2: sex ratio is large (Qatar/UAE), Income per person is also large, Investment per GDP is also large, Phones per person
+Group3: nothing really important, nothing above 0.5. Most significant is children mortality & children per woman is low, however we cannot say much about this group
+Group4: Developed countries *high in suicide may be caused by developments in phones/internet/high_income
+Group5: Big countries in both tot_pop & urban_pop 
+(0.5 is something worth mentioning)
+Group6: Poor countries (Mainly african countries) no internet, small population, lots of children per women, child mortality is high etc.
+=======
+>>>>>>> 8fcdb56ebab5c31178109455c11232d8488129dc
 
-
+ 
 Module 7: CFA
 
 
@@ -21,6 +39,8 @@ Module 3. PCA : Asia is the most diverse continent. Africa the biggest in
 
 Module 4. MDS: Asia again is the most diverse. Africa is opposite than Europe
 USA and Canada s closer to Europe. Mexico closer to Central America
+
+Module 5. EFA: Some countries are hidden in plot because of their size. 4 factors were identified; Developed (factor1), Crowded(factor2), Income/Gender (factor3), Inequality(factor4).
 
 Module 6. Cluster between continents: interesting that Oceania is grouped with Africa.
 the reason is that Oceania has Austrialia and NZ, but rest of countries are small islands
