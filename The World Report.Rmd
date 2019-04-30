@@ -26,6 +26,8 @@ Our motivation is focused on comparing countries from the economical, social and
 
 In this section, the process of data cleaning and identifying outliers is described. After importing the data from multiple csv files, the next process was to merge the columns on the country and by the year(2016).  Once the merging process was complete, a function was found that would divide the countries by the continent they belong in order to create a new column called “continent.”  Unfortunately, the function did not divide the Americas into North, South, and Central so a for loop was created to iterate through the countries column in order to place them into a more specific part of the Americas.  The reason for the new column “continent” was to account for missing values in our data.  If an NA value was spotted it would insert the median value depending on the continent associated with the country that had the missing value.  Outliers are present in the data and boxplots were created in order to visualize which countries were outliers according to the indicator. Outliers were not removed because in this case the outlier values were not the results of an error, but instead were actual datapoints. If the outliers were removed, the potential to lose meaning and value from the data would increase greatly. The reason is an outlier would be associated with a country and in order to remove the outlier we would have to delete an entire row.
 <br/>
+
+In order to get insights about outliers, five columns were presented on boxplots below. Please find all boxplots for each column in the Appendix.
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE,dpi=300, fig.width=20,fig.height=11}
 #PART 1: Read csv, merge, clean and plot outliers.
 library(readr)
@@ -249,3 +251,8 @@ print(groups[4])
 
 #VII. Conclusion ->
 <!-- Team presented meaningful findings and discussed the pros and cons of their study. Team suggested some future works for post analysis. -->
+
+
+#VIII. Appendix
+
+![All boxplot visualizing Outliers](img/Outliers.png)

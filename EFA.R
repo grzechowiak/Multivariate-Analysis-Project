@@ -70,6 +70,7 @@ EFA_plot <- function(data_input=NULL) {
   colors <- c("#91cf60", "#3288bd", "#fee08b", "#80cdc1", gray(.80))
   sort(wrld_simpl@data$NAME)
   EFA_plot <- plot(wrld_simpl, col = country_colors)
+  EFA_plot <- EFA_plot + title(main=paste("Top 10 countries for Each Factor")) 
   EFA_plot <-  legend(x=-180,y=15, inset=.09, title="",
                        fill=colors, legend=c("Developed", "Crowded", "High Inequality", "Gender/Income", 'NoData'), 
                       horiz=FALSE, cex=1.5, bg="transparent",bty = "n")

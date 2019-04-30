@@ -23,7 +23,7 @@ data2 <- select(data2,'continent', 'country', #'armed_pp',
 colnames(data2)[which(colnames(data2) %in% c(
   "phones_p100", "children_p_woman","life_exp_yrs","suicide_pp","sex_ratio_p100",
   "corruption_CPI","internet_%of_pop","child_mort_p1000","income_per_person",
-  "gini") )] <- c("PHONES","CHILDREN","LIFE EXP","SUICIDE","SEX RATIO","LESS CORRUPTION", 
+  "gini") )] <- c("PHONES","CHILDREN","LIFE EXP.","SUICIDE","SEX RATIO","LESS CORRUPTION", 
                   "INTERNET","CHILD MORT.","INCOME","INEQUALITY")
 
 ## Scale only column 3 to 10 (exclude columns with names)
@@ -46,13 +46,14 @@ plot.pca2 <- plot.pca
 PCA_plot_12 %<a-% ggbiplot(plot.pca, obs.scale = 1, var.scale = 1,varname.size = 3,
          groups = data2$continent, ellipse = TRUE) +
   scale_color_discrete(name = 'Continents:') +
-  theme(legend.direction = 'horizontal', legend.position = 'top')
+  theme(legend.direction = 'horizontal', legend.position = 'bottom') + 
+  theme(legend.text=element_text(size=10)) 
 
 PCA_plot_13 %<a-% ggbiplot(plot.pca, choices = c(1,3), obs.scale = 1, var.scale = 1,varname.size = 3,
                         groups = data2$continent, ellipse = TRUE) +
   scale_color_discrete(name = 'Continents:') +
-  theme(legend.direction = 'horizontal', legend.position = 'top')
-
+  theme(legend.direction = 'horizontal', legend.position = 'bottom') + 
+  theme(legend.text=element_text(size=10)) 
 
 ## PCA MEANING:
 # PC1: Developed countries, HIGH: phones, life exp., less corrup., internet income
