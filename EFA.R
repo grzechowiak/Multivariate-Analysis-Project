@@ -20,6 +20,12 @@ find_EFA <- function(data_input=NULL) {
 EFA_loadings <- function(data_input=NULL) {
   data <- cleaned
   num_data <- data[, c(-1,-2)]
+  #Change colnames
+  colnames(num_data)[which(colnames(num_data) %in% c("pop_total", "murder_pp","armed_pp",
+    "phones_p100", "children_p_woman","life_exp_yrs","suicide_pp","sex_ratio_p100",
+    "corruption_CPI","internet_%of_pop","child_mort_p1000","income_per_person",
+    "gini", "investments_per_ofGDP", "urban_pop_tot") )] <- c("POPULATION", "MURDER", "ARMED","PHONES","CHILDREN","LIFE EXP.","SUICIDE","SEX RATIO","LESS CORRUPTION", 
+                    "INTERNET","CHILD MORT.","INCOME","INEQUALITY", "INVESTMENT", "URBAN POPULATION")
   data.fa <- factanal(num_data, factors = 4, scores = "regression")
   print(data.fa$loadings, cut=0.4)
 }
