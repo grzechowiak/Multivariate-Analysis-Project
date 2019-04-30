@@ -1,37 +1,27 @@
 
-#CFA <- function(data_input=NULL) {
-#}
-#CFA(cleaned)
-#http://www.statpower.net/Content/312/Handout/Confirmatory%20Factor%20Analysis%20with%20R.pdf
-#####with 2 factors
-library(sem)
-cfa_data <- cleaned
-cfa_data <- cfa_data[,c(-1,-2,-4,-5,-9,-11,-15,-16,-17)]
-colnames(cfa_data)
+#with sem error: Iteration limit exceeded.  Algorithm failed.
+CFA <- function(data_input=NULL) {
+library(lavaan)
+d <- cleaned
+d <- d[,c(-1,-2,-5,-9,-16)]
+colnames(d)[which(colnames(d) %in% c("internet_%of_pop") )] <- c("internet")
 
-cfa_model <- specifyModel(text = "
-                          Factor1          -> phones_p100, lambda1, NA              
-                          Factor1          -> life_exp_yrs, lambda2, NA  
-                          Factor1          -> corruption_CPI, lambda3, NA                
-                          Factor1          -> internet_%of_pop, lambda4, NA                           
-                          Factor1          -> children_p_woman, lambda5, NA                        
-                          Factor1          -> child_mort_p1000, lambda6, NA              
-                          Factor2          -> urban_pop_tot, lambda7, NA   
-                          Factor2          -> pop_total, lambda8, NA
-                          Factor1          <-> Factor2, rho0, NA
-                          phones_p100      <-> phones_p100, theta1, NA
-                          life_exp_yrs     <-> life_exp_yrs, theta2, NA
-                          corruption_CPI   <-> corruption_CPI, theta3, NA
-                          internet_%of_pop <-> internet_%of_pop, theta4, NA
-                          children_p_woman <-> children_p_woman, theta5, NA
-                          child_mort_p1000 <-> child_mort_p1000, theta6, NA
-                          urban_pop_tot    <-> urban_pop_tot, theta7, NA
-                          pop_total        <-> pop_total, theta8, NA
-                          Factor1          <-> Factor1, NA, 1
-                          Factor2          <-> Factor2, NA, 1")
-cfa_sem <- sem(cfa_model, cor(cfa_data), nrow(cfa_data))
-summary(cfa_sem)
+model4 <- ' Development_Level =~ 1*phones_p100 + (-1)*children_p_woman + 1*life_exp_yrs + 1*corruption_CPI + 1*internet + (-1)*child_mort_p1000 
+Population_Level =~ 1*urban_pop_tot + 1*pop_total
+Inequality_Level =~ 1*murder_pp + 1*gini 
+Gender_Income =~ 1*sex_ratio_p100 + 1*income_per_person '
 
 
+model4 <- ' Development_Level =~ start(1)*phones_p100 + start(-1)*children_p_woman + start(1)*life_exp_yrs + start(1)*corruption_CPI + start(1)*internet + start(-1)*child_mort_p1000 
+Population_Level =~ start(1)*urban_pop_tot + start(1)*pop_total
+Inequality_Level =~ start(1)*murder_pp + start(1)*gini 
+Gender_Income =~ start(1)*sex_ratio_p100 + start(1)*income_per_person '
+
+fit4 <- lavaan::cfa(model4, data = log(d))
+summary(fit4)
+parTable(fit4)
+lavInspect(fit4, "optim.gradient")
 
 
+}
+CFA(cleaned)
