@@ -7,6 +7,7 @@ output:
   pdf_document: default
   word_document: default
 ---
+
 #I. Introduction: ROGELIO
 <!-- Team clearly described the dataset and clearly described the motivation behind studying the data. Team provided -->
 <!-- scholarly citations or quantitative facts to describe the motivation. -->
@@ -22,7 +23,6 @@ library(readxl)
 library(dplyr)
 library(countrycode)
 library(car)
-
 source('Read_Clean.R')
 cleaned <- Read_Clean()
 ```
@@ -38,50 +38,75 @@ cleaned <- Read_Clean()
 The data set contains 17 variables. In order to easly present them, dimension reduction analysis were computed. Two techniques were used: Multidimensional Scaling (MDS) and Principal Component Analysis (PCA).
 
 
-##Part A: MDS -> MIKA
-- ALL VARIABLES INCLUDED
--we can see Clusters
--Asia: we can see is the most spread out and has the most outliers, spreads across Africa to Europe 
--Africa is the opposite of Europe
--South America and North America are similar
+##Part A: Multidimensional Scaling (MDS)
 
-```{r}
-#PART 2: MDS
-library(scatterplot3d)
-```
+In order to provide a general insignis into the data, all countries were presented in 3-dimensional space. At the first glance clusters between continents can be seen. Countries which are in the same continent in general present a similar profile. The most diverse continent is Asia with many outliers. Countries in Asia spread from Europe (the one end) and Africa (the second end). It can be seen that North America and South America are similar to each other.
+
 ![image](img/mds2_high_r.gif)
+```{r}
+library(scatterplot3d)
+source('MDS.R')
+```
 
 
-##Part B: Principal Components -> ME
-```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
-# PART 3: PCA
+
+##Part B: Principal Components
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, include=FALSE}
 library(maptools)
 library(pryr)
 library(ggbiplot) #if the library is not present use the code below
 #library(devtools)
 #install_github("vqv/ggbiplot")
 source('PCA.R')
-(PrinCompPlot <- PCA(cleaned))
+PrinCompPlot <- PCA(cleaned)
 ```
-FROM PCA excluded are: pop_total, murder_pp, armed_pp, urban_pop_tot, investment_per_of_GDP
-it is because they spoil correlation between variables and as such more PC would be needed to explain
-the relation.
+
+The Principal Component Analysis (PCA) was used in order to provide insights into the data and visualize it in two-dimensional plots. Three principal components were presented on the plots below and their cumulative proportion of variance is 74%.
+
+Interpretation of PC1, PC2, and PC3 is as follows:
+PC1: is highly loaded in variables such as number of phones, life expectancy, Corruption index, Acces to the Internet and Income.  
+PC2: is highly loaded in the number of suicides and sex ratio.
+PC3: is especially meaningful in the context of inequality.
 
 ![image](img/PCA_loadings.png)
 
-## PCA MEANING:
-# PC1: Developed countries, HIGH loaded in: phones, life exp., less corrup., internet income 
-# PC2: sex ratio is high, suicide low
-# PC3: inequality is high
 
-- ellipses to help visualize concentration of points. The size of ellipses is influenced by outlines.
+In order to present the PCA result, two graphs were displayed below. Ellipses were added to the graphs which shows a concentration of points. Ther size is influenced by outliers.
 
-- on the right we have develope countires: EU, North America where the most correlated are: less corruption, internet, life exp., phones, income.
-- on the left have not as developed countries: Africa where Child mortality and children per woman and inequality is high.
--Asia is the most diverse continent (especially in PC2). It also has the highest sex ration (means more mean per woman). Super low PC2 for sex ration (Quatar, UAE)
-- Central America & South are in the middle on the plot
 
-- on PC1 & PC3 explain better Africa. (it is because PC3 is mostly about inequality and development)
+*Plot PC1 vs PC2*
+-On the right of the plot with a high value of PC1 hight developed countries in Europe and North America can be spotted. Those contents are above the average in the context of Less corruption, Life expectancy, Internet access, number of phones and income.
+
+- On the left side of the plot, with a low value of PC1 not less developed countries in Africa can be spotted. Those countries are above the average in the context of high child mortality, a number of children per woman and inequality.
+
+- Interesting phenomena is presented by looking at Asia. The continent is the most diverse among all of the others in both directions PC1 and PC2. Some countries in Asia are highly developed while others are rather poor (PC1). In the context of PC2, some countries have extreme value for sex ratio (men outnumber women significantly). Those countries are Qatar and the UAE.
+
+- PC1 and PC2 do not give us many insights into Central America nor South America. Since values for these continents are in the middle of the plot.
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+PrinCompPlot[1]
+```
+
+*Plot PC2 vs PC3*
+The second plot shows that very high inequality is presented especially in South America and Africa
+
+The above plots show also that there is a high correlation between variables: number of phones, less corruption, Internet access and income. Another group of highly correlated variables are child mortality and a number of children per woman.  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+PrinCompPlot[2]
+```
+
+*PCA on the World Map*
+In order to show which countries are the highest in what Principal Component the World Map was presented. From each component (PC1, PC2, and PC3) top 15 countries with the highest loading in each group were chosen and plotted on the map.
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+PrinCompPlot <- PCA(cleaned)
+```
+
+Note: from the analysis columns such as Population total, number of murder, number of armed forces, urban population total and percentage of investments are excluded. Those variables had a low correlation with the rest of the columns and much more dimensions would be needed to explain the data. As such information would not be possible to be explained in 2-dimensional plot.
+
+
 
 
 #IV. CLUSTERING - ROGELIO

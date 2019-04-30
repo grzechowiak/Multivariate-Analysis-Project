@@ -43,12 +43,12 @@ summary(pca, loadings=T)
 plot.pca <- prcomp(data2[,c(-1,-2)], scale. = TRUE)
 plot.pca2 <- plot.pca
 
-PCA_plot %<a-% ggbiplot(plot.pca, obs.scale = 1, var.scale = 1,varname.size = 3,
+PCA_plot_12 %<a-% ggbiplot(plot.pca, obs.scale = 1, var.scale = 1,varname.size = 3,
          groups = data2$continent, ellipse = TRUE) +
   scale_color_discrete(name = 'Continents:') +
   theme(legend.direction = 'horizontal', legend.position = 'top')
 
-PCA_plot1 %<a-% ggbiplot(plot.pca, choices = c(1,3), obs.scale = 1, var.scale = 1,varname.size = 3,
+PCA_plot_13 %<a-% ggbiplot(plot.pca, choices = c(1,3), obs.scale = 1, var.scale = 1,varname.size = 3,
                         groups = data2$continent, ellipse = TRUE) +
   scale_color_discrete(name = 'Continents:') +
   theme(legend.direction = 'horizontal', legend.position = 'top')
@@ -92,14 +92,14 @@ country_colors[wrld_simpl@data$NAME %in% pc2] <-       "#fc8d59" #Sex ration & i
 country_colors[wrld_simpl@data$NAME %in% pc3] <-    "#fee08b" #yellow- inequality is high ->PC3
 
 #Plot the map
-PC_plot <-  plot(wrld_simpl, col = country_colors) 
-PC_plot <-  title(main=paste("Top 15 Countries For Each Principal Component"),cex=15) 
-PC_plot <- legend(x=-180,y=15, inset=.09, title="",
+PC_plot_map <-   plot(wrld_simpl, col = country_colors) 
+PC_plot_map <-  title(main=paste("Top 15 Countries For Each Principal Component"),cex=15) 
+PC_plot_map <-  legend(x=-180,y=15, inset=.09, title="",
                                              c("PC1: Developed","PC2: High Sex Ratio", "PC3: High Inequality ","NoData"), 
                                              fill=c("#91cf60","#fc8d59","#fee08b", gray(.80)), 
                                              horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
 
 
-ret <- list(PCA_plot, PCA_plot1)
+ret <- list(PCA_plot_12, PCA_plot_13,PC_plot_map)
 return(ret)
 }
