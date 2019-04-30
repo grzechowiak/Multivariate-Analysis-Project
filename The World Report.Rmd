@@ -3,17 +3,18 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
+  word_document: default
   pdf_document: default
   html_document: default
-  word_document: default
 ---
-#I. Introduction:
-Team clearly described the dataset and clearly described the motivation behind studying the data. Team provided
-scholarly citations or quantitative facts to describe the motivation.
 
-#II. Data Cleaning and Outlier Visualization:
-Team clearly described their data cleaning and outlier removal process. Team presented insightful visualizations
-motivating to do further exploratory or confirmatory analysis.
+#I. Introduction: ROGELIO
+<!-- Team clearly described the dataset and clearly described the motivation behind studying the data. Team provided -->
+<!-- scholarly citations or quantitative facts to describe the motivation. -->
+
+#II. Data Cleaning and Outlier Visualization: ROGELIO
+<!-- Team clearly described their data cleaning and outlier removal process. Team presented insightful visualizations -->
+<!-- motivating to do further exploratory or confirmatory analysis. -->
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE,dpi=300, fig.width=20,fig.height=11}
 #PART 1: Read csv, merge, clean and plot outliers.
@@ -22,7 +23,6 @@ library(readxl)
 library(dplyr)
 library(countrycode)
 library(car)
-
 source('Read_Clean.R')
 cleaned <- Read_Clean()
 ```
@@ -30,50 +30,103 @@ cleaned <- Read_Clean()
 
 
 
-#III. Dimension Reduction Analysis: 
-Team applied dimension reduction analysis correctly and discussed the
-motivation behind that. Also, they provided interesting insights into the
-results.
+#III. Dimension Reduction Analysis: MIKA & ME
+<!-- Team applied dimension reduction analysis correctly and discussed the -->
+<!-- motivation behind that. Also, they provided interesting insights into the -->
+<!-- results. -->
 
-##Part A: MDS
-- ALL VARIABLES INCLUDED
--we can see Clusters
--Asia: we can see is the most spread out and has the most outliers, spreads across Africa to Europe 
--Africa is the opposite of Europe
--South America and North America are similar
--
-```{r}
-#PART 2: MDS
+The data set contains 17 variables. In order to easly present them, dimension reduction analysis were computed. Two techniques were used: Multidimensional Scaling (MDS) and Principal Component Analysis (PCA).
+
+
+####Part A: Multidimensional Scaling (MDS)
+
+In order to provide a general insignis into the data, all countries were presented in 3-dimensional space. At the first glance clusters between continents can be seen. Countries which are in the same continent in general present a similar profile. The most diverse continent is Asia with many outliers. Countries in Asia spread from Europe (the one end) and Africa (the second end). It can be seen that North America and South America are similar to each other.
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, include=FALSE}
+library(scatterplot3d)
+# source('MDS.R')
 ```
-![image](img/3d.gif)
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=8,fig.height=8}
-# PART 3: PCA
+![Continents presented in 3D space](img/mds2_high_r.gif)
+
+
+
+
+#####Part B: Principal Components
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, include=FALSE}
+library(maptools)
 library(pryr)
 library(ggbiplot) #if the library is not present use the code below
 #library(devtools)
 #install_github("vqv/ggbiplot")
 source('PCA.R')
-(PrinCompPlot <- PCA(cleaned))
+PrinCompPlot <- PCA(cleaned)
 ```
-FROM PCA excluded are: pop_total, murder_pp, armed_pp, urban_pop_tot, investment_per_of_GDP
-it is because they spoil correlation between variables and as such more PC would be needed to explain
-the relation.
 
-## PCA MEANING:
-# PC1: Developed countries, HIGH loaded in: phones, life exp., less corrup., internet income 
-# PC2: sex ratio is high, suicide low
-# PC3: inequality is high
+The Principal Component Analysis (PCA) was used in order to provide insights into the data and visualize it in two-dimensional plots. Three principal components were presented on the plots below and their cumulative proportion of variance is 74%.
+<br/>
 
-- ellipses to help visualize concentration of points. The size of ellipses is influenced by outlines.
+Interpretation of PC1, PC2, and PC3 is as follows:<br/>
+PC1: is highly loaded in variables such as number of phones, life expectancy, Corruption index, Acces to the Internet and Income.<br/>
+PC2: is highly loaded in the number of suicides and sex ratio. <br/>
+PC3: is especially meaningful in the context of inequality.
 
-- on the right we have develope countires: EU, North America where the most correlated are: less corruption, internet, life exp., phones, income.
-- on the left have not as developed countries: Africa where Child mortality and children per woman and inequality is high.
--Asia is the most diverse continent (especially in PC2). It also has the highest sex ration (means more mean per woman). Super low PC2 for sex ration (Quatar, UAE)
-- Central America & South are in the middle on the plot
+![Summary Result for the first three Principal Components](img/PCA_loadings.png)
 
-- on PC1 & PC3 explain better Africa. (it is because PC3 is mostly about inequality and development)
 
+In order to present the PCA result, two graphs were displayed below. Ellipses were added to the graphs which shows a concentration of points. Ther size is influenced by outliers. <br/>
+<br/>
+
+*Plot PC1 vs PC2* 
+<br/>
+-On the right of the plot with a high value of PC1 hight developed countries in Europe and North America can be spotted. Those contents are above the average in the context of Less corruption, Life expectancy, Internet access, number of phones and income.
+
+<br/>
+
+- On the left side of the plot, with a low value of PC1 not less developed countries in Africa can be spotted. Those countries are above the average in the context of high child mortality, a number of children per woman and inequality.
+
+<br/>
+
+- Interesting phenomena is presented by looking at Asia. The continent is the most diverse among all of the others in both directions PC1 and PC2. Some countries in Asia are highly developed while others are rather poor (PC1). In the context of PC2, some countries have extreme value for sex ratio (men outnumber women significantly). Those countries are Qatar and the UAE.
+
+<br/>
+
+- PC1 and PC2 do not give us many insights into Central America nor South America. Since values for these continents are in the middle of the plot.
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+PrinCompPlot[1]
+```
+
+*Plot PC2 vs PC3* 
+<br/>
+The second plot shows that very high inequality is presented especially in South America and Africa
+<br/>
+The above plots show also that there is a high correlation between variables: number of phones, less corruption, Internet access and income. Another group of highly correlated variables are child mortality and a number of children per woman.  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+PrinCompPlot[2]
+```
+
+*PCA on the World Map* 
+<br/>
+In order to show which countries are the highest in what Principal Component the World Map was presented. From each component (PC1, PC2, and PC3) top 15 countries with the highest loading in each group were chosen and plotted on the map.
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+PrinCompPlot <- PCA(cleaned)
+```
+
+Note: from the analysis columns such as Population total, number of murder, number of armed forces, urban population total and percentage of investments are excluded. Those variables had a low correlation with the rest of the columns and much more dimensions would be needed to explain the data. As such information would not be possible to be explained in 2-dimensional plot.
+
+
+
+
+
+
+
+
+#IV. CLUSTERING - ROGELIO
+#### PART A: Hierarchical Clustering between Continents
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=11,fig.height=7}
 # PART 3: Hierarchical Clustering between Continents
@@ -86,10 +139,11 @@ Include all variables
 South, North and Europe are very similar. AND C America, Asia, Oceania and Africa are similar. Interesting is Africa is clustered with Oceania (with include Australia and NZ but also many small island which push Oceania into level of Africa)
 
 
+#### PART B: K-means and Model-Based clustering between Conutries
+Jereamy both
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 # PART 4: K-means & Model Based Clustering between Countries
 library(mclust)
-library(maptools)
 source('clusters_countries.R')
 Cl_countries <- clusters_countries(cleaned)
 ```
@@ -108,15 +162,80 @@ pop_total murder_pp armed_pp phones_p100 children_p_woman life_exp_yrs suicide_p
 
 - we lost "crowded" group from k-means. It transfoms into group 7 which describe high Income, Sex Ratio, Population, phones
 
+
+
+# V. Exploratory Factor Analysis -MIKA
+In order to find the number of factors, EFA was performed starting with 1 factor, increasing the number of factors until getting a value for RMSE lower than 0.05. Therefore, it was concluded that the optimal number of factors is four. Performing EFA with 4 factors, the loadings are:    
+
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+  
 #PART 5: EFA
 source('EFA.R')
-EFA(cleaned)
+EFA_loadings(cleaned)
+```
+From the loadings it can be interpreted:  
+<br/>
+-1.	Factor 1 has high life expectancy, internet access, balanced income per person and it is low in child mortality and children per women. For these reasons, represents the level of development of the country.
+<br/>
+-2.	Factor 2 represents the level of population.
+<br/>
+-3.	Factor 3 represents inequality and murder.
+<br/>
+-4.	Factor 4 represents the level of income related with the amount of men and women that the country has. 
+In order to visualize these four factors graphically, the top 10 for each factor’s scores was taken and create four groups of countries, where each factor has more relevance. The groups of countries are named according with the meaning of each factor as follows: 
+<br/>
+-Factor 1 -> Developed <br/>
+-Factor 2 -> Crowed  <br/>
+-Factor 3 -> Inequality <br/>
+-Factor 4 -> Gender/Income  <br/>
+These can be visualized in the following graph: <br/>
+
+
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+source('EFA.R')
+groups = EFA_plot(cleaned)
+```
+
+Note: There are some countries such as Singapore or Qatar that are in the groups but are too small to show in the map. 
+<br/>
+<br/>
+The countries in group 1 are:  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
+library(knitr)
+print(groups[1])
+```
+
+The countries in group 2 are:  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
+library(knitr)
+print(groups[2])
 ```
 
 
+The countries in group 3 are:  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
+library(knitr)
+print(groups[3])
+```
+
+The countries in group 4 are:  
+
+```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
+library(knitr)
+print(groups[4])
+```
+
+#VI. Confirmatory Factor Analysis -> Mika put links
 ```{r}
 #PART 6: CFA
 #???????
 ```
 
+
+
+#VII. Conclusion ->
+<!-- Team presented meaningful findings and discussed the pros and cons of their study. Team suggested some future works for post analysis. -->

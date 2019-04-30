@@ -85,7 +85,7 @@ country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd" #blue  "Crowded"
 Cl_countries <-  plot(wrld_simpl, col = country_colors) 
 Cl_countries <- Cl_countries + title(main=paste("K-Means Clustering")) 
 Cl_countries <- Cl_countries <- legend(x=-180,y=15, inset=.09, title="",
-            c("Income/Gender","Poor/Corrupted","Developed", "Low birthrate","Inequality","Crowded","NoData"),
+            c("Income/Gender","Poor/Corrupted","Developed", "Low birthrate","High Inequality","Crowded","NoData"),
             fill=c("#80cdc1","#d53e4f", "#91cf60", "#fc8d59","#fee08b","#3288bd", gray(.80)),
             horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
 
@@ -154,7 +154,7 @@ country_colors[wrld_simpl@data$NAME %in% gr7.mc] <- "#f1a340" #orange  "Urban Po
 
 #Plot the map
 Cl_countries.mc <-  plot(wrld_simpl, col = country_colors) 
-Cl_countries.mc <- Cl_countries.mc + title(main=paste("Model Based Clustering")) 
+Cl_countries.mc <- Cl_countries.mc + title(main=paste("Model Based Clustering"),cex=15) 
 Cl_countries.mc <- Cl_countries.mc <- legend(x=-180,y=15, inset=.09, title="",
                                        c("Poor/Corrupted","Developed","Semi-Developed","Low population","Highly Developed","Unequal/Corrupted","Urban Population/Phones","NoData"), 
                                        fill=c("#d53e4f","#41ab5d", "#c7e9c0", "#fb590e","#006d2c","#fee08b" ,"#f1a340", gray(.80)), 

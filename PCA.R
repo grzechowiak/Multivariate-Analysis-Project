@@ -43,22 +43,16 @@ summary(pca, loadings=T)
 plot.pca <- prcomp(data2[,c(-1,-2)], scale. = TRUE)
 plot.pca2 <- plot.pca
 
-PCA_plot %<a-% ggbiplot(plot.pca, obs.scale = 1, var.scale = 1,varname.size = 3,
+PCA_plot_12 %<a-% ggbiplot(plot.pca, obs.scale = 1, var.scale = 1,varname.size = 3,
          groups = data2$continent, ellipse = TRUE) +
   scale_color_discrete(name = 'Continents:') +
   theme(legend.direction = 'horizontal', legend.position = 'top')
 
-PCA_plot1 %<a-% ggbiplot(plot.pca, choices = c(1,3), obs.scale = 1, var.scale = 1,varname.size = 3,
+PCA_plot_13 %<a-% ggbiplot(plot.pca, choices = c(1,3), obs.scale = 1, var.scale = 1,varname.size = 3,
                         groups = data2$continent, ellipse = TRUE) +
   scale_color_discrete(name = 'Continents:') +
   theme(legend.direction = 'horizontal', legend.position = 'top')
 
-#PC1 the highest
-tail(sort(pca$scores[,1]),6)
-#PC2 the highest
-tail(sort(pca$scores[,2]),6)
-#PC3 the highest
-tail(sort(pca$scores[,3]),6)
 
 ## PCA MEANING:
 # PC1: Developed countries, HIGH: phones, life exp., less corrup., internet income
@@ -68,6 +62,44 @@ tail(sort(pca$scores[,3]),6)
 #Source of biplot:
 #https://github.com/vqv/ggbiplot
 
-ret <- list(PCA_plot, PCA_plot1)
+####### ####### ####### ####### ####### ####### 
+####### Print results of PCA on the map ####### 
+####### ####### ####### ####### ####### ####### 
+
+#Select what countries are in which PCA
+
+#PC1 the highest
+pc1 <- tail(sort(pca$scores[,1]),15) %>% as.data.frame()
+pc1$country <- rownames(pc1)
+pc1 <- as.vector(unlist(pc1[,2]))
+
+#PC2 the highest
+pc2 <- tail(sort(pca$scores[,2]),15) %>% as.data.frame()
+pc2$country <- rownames(pc2)
+pc2 <- as.vector(unlist(pc2[,2]))
+
+#PC3 the highest
+pc3 <- tail(sort(pca$scores[,3]),15) %>% as.data.frame()
+pc3$country <- rownames(pc3)
+pc3 <- as.vector(unlist(pc3[,2]))
+
+# Creating map
+data(wrld_simpl)
+#Specify Columns per group
+country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
+country_colors[wrld_simpl@data$NAME %in% pc1] <-       "#91cf60" #green DEVELOPD ->PC1
+country_colors[wrld_simpl@data$NAME %in% pc2] <-       "#fc8d59" #Sex ration & inequality ->PC2 
+country_colors[wrld_simpl@data$NAME %in% pc3] <-    "#fee08b" #yellow- inequality is high ->PC3
+
+#Plot the map
+PC_plot_map <-   plot(wrld_simpl, col = country_colors) 
+PC_plot_map <-  title(main=paste("Top 15 Countries For Each Principal Component"),cex=15) 
+PC_plot_map <-  legend(x=-180,y=15, inset=.09, title="",
+                                             c("PC1: Developed","PC2: High Sex Ratio", "PC3: High Inequality ","NoData"), 
+                                             fill=c("#91cf60","#fc8d59","#fee08b", gray(.80)), 
+                                             horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
+
+
+ret <- list(PCA_plot_12, PCA_plot_13,PC_plot_map)
 return(ret)
 }
