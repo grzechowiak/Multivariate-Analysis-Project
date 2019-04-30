@@ -3,9 +3,9 @@ title: "The World Report"
 author: "Us"
 date: "April 26, 2019"
 output:
-  html_document: default
-  pdf_document: default
   word_document: default
+  pdf_document: default
+  html_document: default
 ---
 
 #I. Introduction: ROGELIO
@@ -38,19 +38,21 @@ cleaned <- Read_Clean()
 The data set contains 17 variables. In order to easly present them, dimension reduction analysis were computed. Two techniques were used: Multidimensional Scaling (MDS) and Principal Component Analysis (PCA).
 
 
-##Part A: Multidimensional Scaling (MDS)
+####Part A: Multidimensional Scaling (MDS)
 
 In order to provide a general insignis into the data, all countries were presented in 3-dimensional space. At the first glance clusters between continents can be seen. Countries which are in the same continent in general present a similar profile. The most diverse continent is Asia with many outliers. Countries in Asia spread from Europe (the one end) and Africa (the second end). It can be seen that North America and South America are similar to each other.
 
-![image](img/mds2_high_r.gif)
-```{r}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, include=FALSE}
 library(scatterplot3d)
-source('MDS.R')
+# source('MDS.R')
 ```
 
+![Continents presented in 3D space](img/mds2_high_r.gif)
 
 
-##Part B: Principal Components
+
+
+#####Part B: Principal Components
 
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, include=FALSE}
 library(maptools)
@@ -63,24 +65,32 @@ PrinCompPlot <- PCA(cleaned)
 ```
 
 The Principal Component Analysis (PCA) was used in order to provide insights into the data and visualize it in two-dimensional plots. Three principal components were presented on the plots below and their cumulative proportion of variance is 74%.
+<br/>
 
-Interpretation of PC1, PC2, and PC3 is as follows:
-PC1: is highly loaded in variables such as number of phones, life expectancy, Corruption index, Acces to the Internet and Income.  
-PC2: is highly loaded in the number of suicides and sex ratio.
+Interpretation of PC1, PC2, and PC3 is as follows:<br/>
+PC1: is highly loaded in variables such as number of phones, life expectancy, Corruption index, Acces to the Internet and Income.<br/>
+PC2: is highly loaded in the number of suicides and sex ratio. <br/>
 PC3: is especially meaningful in the context of inequality.
 
-![image](img/PCA_loadings.png)
+![Summary Result for the first three Principal Components](img/PCA_loadings.png)
 
 
-In order to present the PCA result, two graphs were displayed below. Ellipses were added to the graphs which shows a concentration of points. Ther size is influenced by outliers.
+In order to present the PCA result, two graphs were displayed below. Ellipses were added to the graphs which shows a concentration of points. Ther size is influenced by outliers. <br/>
+<br/>
 
-
-*Plot PC1 vs PC2*
+*Plot PC1 vs PC2* 
+<br/>
 -On the right of the plot with a high value of PC1 hight developed countries in Europe and North America can be spotted. Those contents are above the average in the context of Less corruption, Life expectancy, Internet access, number of phones and income.
+
+<br/>
 
 - On the left side of the plot, with a low value of PC1 not less developed countries in Africa can be spotted. Those countries are above the average in the context of high child mortality, a number of children per woman and inequality.
 
+<br/>
+
 - Interesting phenomena is presented by looking at Asia. The continent is the most diverse among all of the others in both directions PC1 and PC2. Some countries in Asia are highly developed while others are rather poor (PC1). In the context of PC2, some countries have extreme value for sex ratio (men outnumber women significantly). Those countries are Qatar and the UAE.
+
+<br/>
 
 - PC1 and PC2 do not give us many insights into Central America nor South America. Since values for these continents are in the middle of the plot.
 
@@ -88,16 +98,18 @@ In order to present the PCA result, two graphs were displayed below. Ellipses we
 PrinCompPlot[1]
 ```
 
-*Plot PC2 vs PC3*
+*Plot PC2 vs PC3* 
+<br/>
 The second plot shows that very high inequality is presented especially in South America and Africa
-
+<br/>
 The above plots show also that there is a high correlation between variables: number of phones, less corruption, Internet access and income. Another group of highly correlated variables are child mortality and a number of children per woman.  
 
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 PrinCompPlot[2]
 ```
 
-*PCA on the World Map*
+*PCA on the World Map* 
+<br/>
 In order to show which countries are the highest in what Principal Component the World Map was presented. From each component (PC1, PC2, and PC3) top 15 countries with the highest loading in each group were chosen and plotted on the map.
 
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
@@ -109,8 +121,12 @@ Note: from the analysis columns such as Population total, number of murder, numb
 
 
 
+
+
+
+
 #IV. CLUSTERING - ROGELIO
-### PART A: Hierarchical Clustering between Continents
+#### PART A: Hierarchical Clustering between Continents
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE, dpi=300, fig.width=11,fig.height=7}
 # PART 3: Hierarchical Clustering between Continents
@@ -123,7 +139,7 @@ Include all variables
 South, North and Europe are very similar. AND C America, Asia, Oceania and Africa are similar. Interesting is Africa is clustered with Oceania (with include Australia and NZ but also many small island which push Oceania into level of Africa)
 
 
-#PART B: K-means and Model-Based clustering between Conutries
+#### PART B: K-means and Model-Based clustering between Conutries
 Jereamy both
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 # PART 4: K-means & Model Based Clustering between Countries
@@ -157,17 +173,22 @@ In order to find the number of factors, EFA was performed starting with 1 factor
 source('EFA.R')
 EFA_loadings(cleaned)
 ```
-From the loadings it can be interpreted:   
-1.	Factor 1 has high life expectancy, internet access, balanced income per person and it is low in child mortality and children per women. For these reasons, represents the level of development of the country. 
-2.	Factor 2 represents the level of population.
-3.	Factor 3 represents inequality and murder. 
-4.	Factor 4 represents the level of income related with the amount of men and women that the country has. 
+From the loadings it can be interpreted:  
+<br/>
+-1.	Factor 1 has high life expectancy, internet access, balanced income per person and it is low in child mortality and children per women. For these reasons, represents the level of development of the country.
+<br/>
+-2.	Factor 2 represents the level of population.
+<br/>
+-3.	Factor 3 represents inequality and murder.
+<br/>
+-4.	Factor 4 represents the level of income related with the amount of men and women that the country has. 
 In order to visualize these four factors graphically, the top 10 for each factor’s scores was taken and create four groups of countries, where each factor has more relevance. The groups of countries are named according with the meaning of each factor as follows: 
-Factor 1 -> Developed 
-Factor 2 -> Crowed 
-Factor 3 -> Inequality
-Factor 4 -> Gender/Income 
-These can be visualized in the following graph: 
+<br/>
+-Factor 1 -> Developed <br/>
+-Factor 2 -> Crowed  <br/>
+-Factor 3 -> Inequality <br/>
+-Factor 4 -> Gender/Income  <br/>
+These can be visualized in the following graph: <br/>
 
 
 
@@ -177,7 +198,8 @@ groups = EFA_plot(cleaned)
 ```
 
 Note: There are some countries such as Singapore or Qatar that are in the groups but are too small to show in the map. 
-
+<br/>
+<br/>
 The countries in group 1 are:  
 
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300, , results='asis'}
