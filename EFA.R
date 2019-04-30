@@ -20,6 +20,16 @@ find_EFA <- function(data_input=NULL) {
 EFA_loadings <- function(data_input=NULL) {
   data <- cleaned
   num_data <- data[, c(-1,-2)]
+  colnames(num_data)
+  #Change colnames
+  colnames(num_data)[which(colnames(num_data) %in% 
+                             c("pop_total","murder_pp","armed_pp","phones_p100",    
+                               "children_p_woman", "life_exp_yrs", "suicide_pp", "urban_pop_tot",
+                               "sex_ratio_p100", "corruption_CPI", "internet_%of_pop", "child_mort_p1000",     
+                               "income_per_person", "investments_per_ofGDP", "gini"))] <- c(
+                                 "POPULATION", "MURDER","ARMED","PHONES","CHILDREN","LIFE EXP.","SUICIDE",
+                                 "URBAN POPULATION", "SEX RATIO","LESS CORRUPTION", "INTERNET","CHILD MORT.",
+                                "INCOME", "INVESTMENT", "INEQUALITY")
   data.fa <- factanal(num_data, factors = 4, scores = "regression")
   print(data.fa$loadings, cut=0.4)
 }
@@ -60,6 +70,7 @@ EFA_plot <- function(data_input=NULL) {
   colors <- c("#91cf60", "#3288bd", "#fee08b", "#80cdc1", gray(.80))
   sort(wrld_simpl@data$NAME)
   EFA_plot <- plot(wrld_simpl, col = country_colors)
+  EFA_plot <- EFA_plot + title(main=paste("Top 10 countries for Each Factor")) 
   EFA_plot <-  legend(x=-180,y=15, inset=.09, title="",
                        fill=colors, legend=c("Developed", "Crowded", "High Inequality", "Gender/Income", 'NoData'), 
                       horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
