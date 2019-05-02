@@ -38,6 +38,7 @@ cluster_plot <-  plot(as.phylo(hc), type = "cladogram", cex = 2,
 #scree_plot <-  plot(rev(hc$height)) # uncomment to check
 
 cutree(hc,3)
+
 #Scree plot support the idea of 3 clusters
 #We have 3 clusters in data:
 #1: Africa & Oceania
