@@ -13,6 +13,7 @@ Gender_Income =~ sex_ratio_p100 + income_per_person'
 
 fit4 <- lavaan::cfa(model4, data = d)
 #ERROR: lavaan WARNING: some observed variances are (at least) a factor 1000 times larger than others; use varTable(fit) to investigate
+fit4 <- lavaan::cfa(model4, data = scale(d))
 
 fit4 <- lavaan::cfa(model4, data = log(d))
 #ERROR: lavaan WARNING: the optimizer warns that a solution has NOT been found!
