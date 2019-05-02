@@ -63,8 +63,8 @@ EFA_plot <- function(data_input=NULL) {
   data(wrld_simpl)
   
   country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
-  country_colors[wrld_simpl@data$NAME %in% gr1] <- "#91cf60"
   country_colors[wrld_simpl@data$NAME %in% gr2] <- "#3288bd"
+  country_colors[wrld_simpl@data$NAME %in% gr1] <- "#91cf60"
   country_colors[wrld_simpl@data$NAME %in% gr3] <- "#fee08b" #Singapore, Qatar, Luxembourg & Bunei are too small to observe in graph
   country_colors[wrld_simpl@data$NAME %in% gr4] <- "#80cdc1"
   colors <- c("#91cf60", "#3288bd", "#fee08b", "#80cdc1", gray(.80))
