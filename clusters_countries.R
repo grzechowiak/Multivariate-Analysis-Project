@@ -13,7 +13,7 @@ clusters_countries <- function(data_input=NULL) {
 clus_coun <- cleaned
 row.names(clus_coun) <- clus_coun$country
 #delete columns: country, continent
-clus_coun[c(1,2)] <- NULL
+clus_coun <- subset(clus_coun, select=-c(continent,country))
 
 #Scale data
 clus_coun <- scale(clus_coun)
@@ -27,14 +27,16 @@ plot.wgss = function(mydata, maxc) {
        ylab="Within groups sum of squares", main="Scree Plot") 
 }
 
+
 #Check # of cluster
 #scree_plot2 <- plot.wgss(clus_coun, 20)
-# Plots shows around 7 clausters
+# Plots shows around 4-5 clausters
 
 #Perform clustering
 set.seed(123)
-km <- kmeans(clus_coun, centers=6, nstart = 20)
+km <- kmeans(clus_coun, centers=5, nstart = 20)
 table(km$cluster)
+# sounds like 5 groups is the best
 
 
 #### GROUP 1 #### 
@@ -63,9 +65,9 @@ gr5$country <- rownames(gr5)
 gr5 <- as.vector(unlist(gr5$country))
 
 #### GROUP 6 #### 
-gr6 <- as.data.frame(subset(clus_coun, km$cluster == 6))
-gr6$country <- rownames(gr6)
-gr6 <- as.vector(unlist(gr6$country))
+# gr6 <- as.data.frame(subset(clus_coun, km$cluster == 6))
+# gr6$country <- rownames(gr6)
+# gr6 <- as.vector(unlist(gr6$country))
 
 
 # Plot all groups on the one map
@@ -79,7 +81,7 @@ country_colors[wrld_simpl@data$NAME %in% gr2] <- "#d53e4f" #red Poor/Corrupted
 country_colors[wrld_simpl@data$NAME %in% gr3] <- "#91cf60" #light green  "Developed"
 country_colors[wrld_simpl@data$NAME %in% gr4] <- "#fc8d59" #orange "Low birthrate
 country_colors[wrld_simpl@data$NAME %in% gr5] <- "#fee08b"  #yellow  "Inequality"
-country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd" #blue  "Crowded"
+# country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd" #blue  "Crowded"
 
 #Plot the map
 Cl_countries <-  plot(wrld_simpl, col = country_colors) 
@@ -104,7 +106,9 @@ centers <- km$centers
 
 #Perform Model based Clustering
 set.seed(123)
-mc <- Mclust(cleaned[,c(-1,-2)])
+mc_data <- subset(cleaned, select=-c(continent,country))
+mc <- Mclust(mc_data)
+
 
 cat("\014") ## just a trick to clean a console. In order to avoid annoying R Console info
 # in Rmarkdown information.
@@ -136,8 +140,8 @@ gr5.mc <- as.vector(unlist(gr5.mc$country))
 gr6.mc <- filter(mc_groups, group==6)
 gr6.mc <- as.vector(unlist(gr6.mc$country))
 
-gr7.mc <- filter(mc_groups, group==7)
-gr7.mc <- as.vector(unlist(gr7.mc$country))
+# gr7.mc <- filter(mc_groups, group==7)
+# gr7.mc <- as.vector(unlist(gr7.mc$country))
 
 
 #library(maptools)
@@ -150,7 +154,7 @@ country_colors[wrld_simpl@data$NAME %in% gr3.mc] <- "#c7e9c0" #LEAST green   "Se
 country_colors[wrld_simpl@data$NAME %in% gr4.mc] <- "#fb590e" #orange "Not Crowded"
 country_colors[wrld_simpl@data$NAME %in% gr5.mc] <- "#006d2c" #MOST green  "Highly Developed"
 country_colors[wrld_simpl@data$NAME %in% gr6.mc] <- "#fee08b" #yellow  "Unequal/Corrupted"
-country_colors[wrld_simpl@data$NAME %in% gr7.mc] <- "#f1a340" #orange  "Urban Population/Phones"
+# country_colors[wrld_simpl@data$NAME %in% gr7.mc] <- "#f1a340" #orange  "Urban Population/Phones"
 
 #Plot the map
 Cl_countries.mc <-  plot(wrld_simpl, col = country_colors) 
@@ -167,7 +171,7 @@ Cl_countries.mc <- Cl_countries.mc <- legend(x=-180,y=15, inset=.09, title="",
 round(t(mc$parameters[["mean"]]),3)
 
 #group 7
-round(t(mc$parameters[["mean"]][,7]),3)
+#round(t(mc$parameters[["mean"]][,7]),3)
 
 
 #COMPARE

@@ -9,6 +9,8 @@ cluster_continents <- function(data_input=NULL) {
 ########################################################
 data_clus <-  cleaned
 data_clus <- data_clus[,-2] # delete country column
+#data_clus <- subset(data_clus, select=-c(country,pop_total,urban_pop_tot, Pop_Dens))
+
 
 #Take median for each continent for each column
 grouped_by_con <- aggregate(. ~ continent, data=data_clus, FUN=median)

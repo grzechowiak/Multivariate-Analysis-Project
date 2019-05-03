@@ -11,7 +11,7 @@ data2 <- cleaned
 #the relation.
 
 #Select interesting columns
-data2 <- select(data2,'continent', 'country', #'armed_pp',
+data2 <- select(data2,'continent', 'country',
                 'phones_p100','children_p_woman','life_exp_yrs',
                 'suicide_pp',
                 'sex_ratio_p100',
@@ -96,7 +96,7 @@ country_colors[wrld_simpl@data$NAME %in% pc3] <-    "#fee08b" #yellow- inequalit
 PC_plot_map <-   plot(wrld_simpl, col = country_colors) 
 PC_plot_map <-  title(main=paste("Top 15 Countries For Each Principal Component"),cex=15) 
 PC_plot_map <-  legend(x=-180,y=15, inset=.09, title="",
-                                             c("PC1: Developed","PC2: High Sex Ratio", "PC3: High Inequality ","NoData"), 
+                                             c("PC1: Developed","PC2: High Sex Ratio", "PC3: High Inequality ","Not in Top 15"), 
                                              fill=c("#91cf60","#fc8d59","#fee08b", gray(.80)), 
                                              horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
 
