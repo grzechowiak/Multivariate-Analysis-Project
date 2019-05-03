@@ -213,63 +213,70 @@ for(i in 1:length(col_names)){
 ############# CHECKING OUTLIERS ############# 
 ######## ######## ######## ######## ######## 
 
-##Check by Boxplots
 
-#library(car)
-# uncomment in order to get a matrix with all boxplots
-#layout(matrix(c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15), nrow = 3, ncol = 5, byrow = TRUE))
-
-
-par(mfrow=c(1,3))
-# #income_per_person
+## This plot in report
+ par(mfrow=c(1,3))
+ #income_per_person
 with(data, Boxplot(income_per_person, id=list(labels=data$country,cex=2),main="Income Per Person", cex.main=2.5))
 
 #Sex_Ratio_p100
 with(data, Boxplot(sex_ratio_p100, id=list(labels=data$country,cex=2),main="Sex Ratio Per 100 People", cex.main=2.5))
-
-# Pop_Total
-# with(data, Boxplot(income_per_person, id=list(labels=data$country,cex=1.5),main="Income Per Person", cex.main=2.5))
-# 
-# #investments_per_ofGDP
-# with(data, Boxplot(investments_per_ofGDP, id=list(labels=data$country,cex=1.5),main="Investments Percentage of GDP", cex.main=2.5))
 
 #Gini
 with(data, Boxplot(gini, id=list(labels=data$country,cex=2),main="GINI Ratio", cex.main=2.5))
 
 
 
+
+## This saved in the Appendix (commented here)
+#library(car)
+# uncomment in order to get a matrix with all boxplots
+layout(matrix(c(1,2,3,4,5,6,7,8,9,10,11,12), nrow = 3, ncol = 4, byrow = TRUE))
+
+# #income_per_person
+with(data, Boxplot(income_per_person, id=list(labels=data$country,cex=1.3),main="Income Per Person", cex.main=2))
+
+#Sex_Ratio_p100
+with(data, Boxplot(sex_ratio_p100, id=list(labels=data$country,cex=1.3),main="Sex Ratio Per 100 People", cex.main=2))
+
+# #investments_per_ofGDP
+with(data, Boxplot(investments_per_ofGDP, id=list(labels=data$country,cex=1.5),main="Investments Percentage of GDP", cex.main=2))
+
+#Gini
+with(data, Boxplot(gini, id=list(labels=data$country,cex=1.3),main="GINI Ratio", cex.main=2))
+
+
+
 # Below are rest of the boxplot, but we just want to present an example
-#par(mfrow=c(1,5))
+
 #child_mort_p1000
-# with(data, Boxplot(child_mort_p1000, id=list(labels=data$country,cex=1.3),main="Child Mortality Rate per 1000", cex.main=2))
+with(data, Boxplot(child_mort_p1000, id=list(labels=data$country,cex=1.3),main="Child Mortality Rate per 1000", cex.main=2))
 # 
 # #Murder_PP Column
 # with(data, Boxplot(murder_pp, id=list(labels=data$country,cex=1.3),main="Murder Per Person", cex.main=2))
 # 
 # #Armed_PP Column
-# with(data, Boxplot(armed_pp, id=list(labels=data$country,cex=1.3),main="Armed Per Person", cex.main=2))
+with(data, Boxplot(armed_pp, id=list(labels=data$country,cex=1.3),main="Armed Per Person", cex.main=2))
 # 
 # #Phones_p100 Column
-# with(data, Boxplot(phones_p100, id=list(labels=data$country,cex=1.3),main="Phones Per 100 People", cex.main=2))
+with(data, Boxplot(phones_p100, id=list(labels=data$country,cex=1.3),main="Phones Per 100 People", cex.main=2))
 # 
 # #children_p_woman Column
-# with(data, Boxplot(children_p_woman, id=list(labels=data$country,cex=1.3),main="Children Per Woman", cex.main=2))
+with(data, Boxplot(children_p_woman, id=list(labels=data$country,cex=1.3),main="Children Per Woman", cex.main=2))
 # 
-#par(mfrow=c(1,5))
+
 # #Life_Exp_Yrs Column
-# with(data, Boxplot(life_exp_yrs, id=list(labels=data$country,cex=1.3),main="Life Expectancy in Years", cex.main=2))
+with(data, Boxplot(life_exp_yrs, id=list(labels=data$country,cex=1.3),main="Life Expectancy in Years", cex.main=2))
 # 
 # #Suicide_PP Column
-# with(data, Boxplot(suicide_pp, id=list(labels=data$country,cex=1.3),main="Suicide Per Person", cex.main=2))
+with(data, Boxplot(suicide_pp, id=list(labels=data$country,cex=1.3),main="Suicide Per Person", cex.main=2))
 # 
-# #Urban_Pop_Tot Column
-# with(data, Boxplot(urban_pop_tot, id=list(labels=data$country,cex=1.3),main="Urban Population Total", cex.main=2))
-# 
+
 # #Internet_%0f_pop
-# with(data, Boxplot(`internet_%of_pop`, id=list(labels=data$country,cex=1.3),main="Internet Usage Perceantage of Population", cex.main=2))
+with(data, Boxplot(`internet_%of_pop`, id=list(labels=data$country,cex=1.3),main="Internet Usage Perceantage of Population", cex.main=2))
 # 
 # #Corruption_CPI
-# with(data, Boxplot(corruption_CPI, id=list(labels=data$country,cex=1.3),main="Corruption CPI Index", cex.main=2))
+with(data, Boxplot(corruption_CPI, id=list(labels=data$country,cex=1.3),main="Corruption CPI Index", cex.main=2))
 # 
 # 
 
@@ -278,14 +285,14 @@ with(data, Boxplot(gini, id=list(labels=data$country,cex=2),main="GINI Ratio", c
 
 # uncomment to check histograms:
 
-# hist(data$pop_total)
+
 # hist(data$murder_pp)
 # hist(data$armed_pp)
 # hist(data$phones_p100)
 # hist(data$children_p_woman)
 # hist(data$life_exp_yrs)
 # hist(data$suicide_pp)
-# hist(data$urban_pop_tot)
+
 # hist(data$sex_ratio_p100)
 # hist(data$corruption_CPI)
 # hist(data$`internet_%of_pop`)

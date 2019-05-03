@@ -255,4 +255,4 @@ Because of big differences
 
 #VIII. Appendix
 
-![All boxplot visualizing Outliers](img/Outliers.png)
+![All boxplot visualizing Outliers](img/Outlier(1600x1200).png)
