@@ -20,15 +20,15 @@ cell_phones <- read_csv("data/cell_phones_per_100_people.csv")
 children_per_woman <- read_csv("data/children_per_woman_total_fertility.csv")
 life_expectancy_years <- read_csv("data/life_expectancy_years.csv")
 suicide_total_deaths <- read_csv("data/suicide_total_deaths.csv")
-urban_population <- read_csv("data/urban_population.csv")
+#urban_population <- read_csv("data/urban_population.csv")
 sex_ratio <- read_csv("data/sex_ratio_all_age_groups.csv")
 corruption <- read_csv("data/corruption_perception_index_cpi.csv")
-internet_users <- read_csv("data/internet_users.csv")
 internet_users <- read_csv("data/internet_users.csv")
 child_mortality <- read_csv("data/child_mortality_0_5_year_olds_dying_per_1000_born.csv")
 income_per_person <- read_csv("data/income_per_person_gdppercapita_ppp_inflation_adjusted.csv")
 investments_per_ofGDP <- read_csv("data/investments_percent_of_gdp.csv")
 gini <- read_csv("data/gini.csv")
+#popdensity <- read_csv("data/popdensity_sqkm_mod.csv")
 
 
 
@@ -60,8 +60,8 @@ cell_phones <- select(cell_phones, "country", "2016")
 colnames(cell_phones) <- c("country", "phones_p100")
 
 #URBAN POPULATION
-urban_population<- select(urban_population, "country", "2016")
-colnames(urban_population) <- c("country", "urban_pop_tot")
+# urban_population<- select(urban_population, "country", "2016")
+# colnames(urban_population) <- c("country", "urban_pop_tot")
 
 #CHILDREN PER WOMAN
 children_per_woman <- select(children_per_woman, "country", "2016")
@@ -108,10 +108,13 @@ colnames(income_per_person) <- c("country", "income_per_person")
 investments_per_ofGDP <- select(investments_per_ofGDP, "country", "2016")
 colnames(investments_per_ofGDP) <- c("country", "investments_per_ofGDP")
 
-
 #GINI
 gini <- select(gini, "country", "2016")
 colnames(gini) <- c("country", "gini")
+
+# #Population Density (sqkm)
+# popdensity <- select(popdensity, 'Country Name', '2016')
+# colnames(popdensity) <- c('country','Pop_Dens')
 
 
 
@@ -122,7 +125,7 @@ data <- merge(data, cell_phones , by="country", all = TRUE)
 data <- merge(data, children_per_woman , by="country", all = TRUE)
 data <- merge(data, life_expectancy_years , by="country", all = TRUE)
 data <- merge(data, suicide_total_deaths , by="country", all = TRUE)
-data <- merge(data, urban_population , by="country", all = TRUE)
+# data <- merge(data, urban_population , by="country", all = TRUE)
 data <- merge(data, sex_ratio , by="country", all = TRUE)
 data <- merge(data, corruption , by="country", all = TRUE)
 data <- merge(data, internet_users , by="country", all = TRUE)
@@ -130,10 +133,15 @@ data <- merge(data, child_mortality, by="country", all = TRUE)
 data <- merge(data, income_per_person, by="country", all = TRUE)
 data <- merge(data, investments_per_ofGDP, by= "country", all=TRUE)
 data <- merge(data, gini, by="country", all=TRUE)
+# data <- merge(x=data, y=popdensity, by="country", all.x=TRUE)
+#pop_density does not come from GapMinder and country names are a little bit
+#different. Since all data but popdensity comes from GapMiner
+#it is assumed that GapMinder is a main source, so we left join to
+#GapMinder dataset.
 
 
-
-
+#After all computation we get rid of pop_total, and from now use pop_density only:
+data <- subset(data, select=-c(pop_total))
 
 
 ######## ######## ######## ######## ######## 
@@ -180,7 +188,7 @@ for (i in 1:nrow(data)){
 col_names <- as.vector(names(data))
 
 #Group by continent and find median
-x <- aggregate(. ~ continent, data=data[,c(-2)], FUN=median)
+x <- aggregate(. ~ continent, data=subset(data, select=-c(country)), FUN=median)
 
 #Create a sign for opposite of %in%
 '%ni%' <- Negate('%in%')
@@ -213,13 +221,13 @@ for(i in 1:length(col_names)){
 
 
 par(mfrow=c(1,3))
-#Pop_Total Column
-with(data, Boxplot(pop_total, id=list(labels=data$country,cex=2),main="Population Total", cex.main=2.5))
+# #income_per_person
+with(data, Boxplot(income_per_person, id=list(labels=data$country,cex=2),main="Income Per Person", cex.main=2.5))
 
 #Sex_Ratio_p100
 with(data, Boxplot(sex_ratio_p100, id=list(labels=data$country,cex=2),main="Sex Ratio Per 100 People", cex.main=2.5))
 
-# #income_per_person
+# Pop_Total
 # with(data, Boxplot(income_per_person, id=list(labels=data$country,cex=1.5),main="Income Per Person", cex.main=2.5))
 # 
 # #investments_per_ofGDP
