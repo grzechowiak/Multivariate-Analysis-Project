@@ -19,10 +19,8 @@ find_EFA <- function(data_input=NULL) {
 }
 EFA_loadings <- function(data_input=NULL) {
   data <- cleaned
-  num_data <- data[, c(-1,-2)]
-  colnames(num_data)
   #Change colnames
-  data <- subset(data, select=-c(continent,country))
+  num_data <- subset(data, select=-c(continent,country))
   
   colnames(num_data)[which(colnames(num_data) %in% 
                              c("murder_pp","armed_pp","phones_p100",    
