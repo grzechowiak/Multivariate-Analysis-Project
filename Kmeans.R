@@ -55,3 +55,73 @@ library(mclust)
 mc <- Mclust(filt.data[,c(3:10)],7)
 table(mc$classification, data$continent)
 plot(mc, what = "classification")
+
+###Bivariate Boxplots####
+library(MVA)
+par(mfrow=c(1,3))
+###GINI/Income_per_person###
+plot(gini ~ income_per_person, data = cleaned,
+     cex.lab = 1,
+     xlab = "Income Per Person",
+     ylab = "GINI Inequality Index",
+     main = "GINI/Income")
+text(gini ~ income_per_person, data = cleaned,
+     labels=(cleaned$country))
+x <- cleaned[,c("income_per_person", "gini")]
+bvbox(x, add = T)
+
+###Life Expectancy Years/Children Per Woman###
+plot(life_exp_yrs ~ children_p_woman, data = cleaned,
+     cex.lab = 1,
+     xlab = "Children Per Woman",
+     ylab = "Life Expectancy Years",
+     main = "Life Expectancy/\nChildren Per Woman")
+text(life_exp_yrs ~ children_p_woman, data = cleaned,
+     labels=(cleaned$country))
+x <- cleaned[,c("children_p_woman", "life_exp_yrs")]
+bvbox(x, add = T)
+
+###Suicide Per Person/Phone per 100 People###
+plot(suicide_pp ~ phones_p100, data = cleaned, 
+     cex.lab = 1,
+     xlab = "Phone per 100 People",
+     ylab = "Suicide Per Person",
+     main = "Suicide/Phone per 100")
+text(suicide_pp ~ phones_p100, data = cleaned,
+     labels=(cleaned$country))
+x <- cleaned[,c("phones_p100", "suicide_pp")]
+bvbox(x, add = T)
+
+colnames(cleaned)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
