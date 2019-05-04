@@ -4,6 +4,7 @@ CFA <- function(data_input=NULL) {
 library(lavaan)
 d <- cleaned
 d <- d[,c(-1,-2,-5,-9,-16)]
+
 colnames(d)[which(colnames(d) %in% c("internet_%of_pop") )] <- c("internet")
 
 model4 <- 'Development_Level =~ phones_p100 + children_p_woman + life_exp_yrs + corruption_CPI + internet + child_mort_p1000 

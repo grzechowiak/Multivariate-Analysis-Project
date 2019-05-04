@@ -73,7 +73,7 @@ data(wrld_simpl)
 country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
 country_colors[wrld_simpl@data$NAME %in% gr1] <- "#d53e4f" #red Poor/Corrupted 
 country_colors[wrld_simpl@data$NAME %in% gr2] <- "#80cdc1" #green "Income/Gender"
-country_colors[wrld_simpl@data$NAME %in% gr3] <- "#c7e9c0" #orange "Developing"
+country_colors[wrld_simpl@data$NAME %in% gr3] <- "#c7e9c0" # "Developing"
 country_colors[wrld_simpl@data$NAME %in% gr4] <- "#91cf60" #light green  "Developed"
 country_colors[wrld_simpl@data$NAME %in% gr5] <- "#fee08b"  #yellow  "Inequality"
 
