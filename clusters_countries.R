@@ -64,11 +64,6 @@ gr5 <- as.data.frame(subset(clus_coun, km$cluster == 5))
 gr5$country <- rownames(gr5)
 gr5 <- as.vector(unlist(gr5$country))
 
-#### GROUP 6 #### 
-# gr6 <- as.data.frame(subset(clus_coun, km$cluster == 6))
-# gr6$country <- rownames(gr6)
-# gr6 <- as.vector(unlist(gr6$country))
-
 
 # Plot all groups on the one map
 #library(maptools)
@@ -76,19 +71,18 @@ data(wrld_simpl)
 
 #Specify Columns per group
 country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
-country_colors[wrld_simpl@data$NAME %in% gr1] <- "#80cdc1" #green "Income/Gender"
-country_colors[wrld_simpl@data$NAME %in% gr2] <- "#d53e4f" #red Poor/Corrupted
-country_colors[wrld_simpl@data$NAME %in% gr3] <- "#91cf60" #light green  "Developed"
-country_colors[wrld_simpl@data$NAME %in% gr4] <- "#fc8d59" #orange "Low birthrate
+country_colors[wrld_simpl@data$NAME %in% gr1] <- "#d53e4f" #red Poor/Corrupted 
+country_colors[wrld_simpl@data$NAME %in% gr2] <- "#80cdc1" #green "Income/Gender"
+country_colors[wrld_simpl@data$NAME %in% gr3] <- "#c7e9c0" # "Developing"
+country_colors[wrld_simpl@data$NAME %in% gr4] <- "#91cf60" #light green  "Developed"
 country_colors[wrld_simpl@data$NAME %in% gr5] <- "#fee08b"  #yellow  "Inequality"
-# country_colors[wrld_simpl@data$NAME %in% gr6] <- "#3288bd" #blue  "Crowded"
 
 #Plot the map
 Cl_countries <-  plot(wrld_simpl, col = country_colors) 
 Cl_countries <- Cl_countries + title(main=paste("K-Means Clustering")) 
 Cl_countries <- Cl_countries <- legend(x=-180,y=15, inset=.09, title="",
-            c("Income/Gender","Poor/Corrupted","Developed", "Low birthrate","High Inequality","Crowded","NoData"),
-            fill=c("#80cdc1","#d53e4f", "#91cf60", "#fc8d59","#fee08b","#3288bd", gray(.80)),
+            c("Poor/Corrupted", "Income/Gender", "Developing", "Developed", "High Inequality", "NoData"),
+            fill=c("#d53e4f","#80cdc1", "#c7e9c0", "#91cf60","#fee08b", gray(.80)),
             horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
 
 
@@ -140,28 +134,23 @@ gr5.mc <- as.vector(unlist(gr5.mc$country))
 gr6.mc <- filter(mc_groups, group==6)
 gr6.mc <- as.vector(unlist(gr6.mc$country))
 
-# gr7.mc <- filter(mc_groups, group==7)
-# gr7.mc <- as.vector(unlist(gr7.mc$country))
-
-
 #library(maptools)
 data(wrld_simpl)
 #Specify Columns per group
 country_colors <- setNames(rep(gray(.80), length(wrld_simpl@data$NAME)), wrld_simpl@data$NAME)
 country_colors[wrld_simpl@data$NAME %in% gr1.mc] <- "#d53e4f" #red "Poor/Corrupted"
+country_colors[wrld_simpl@data$NAME %in% gr3.mc] <- "#c7e9c0" #LEAST green   "Developing"
 country_colors[wrld_simpl@data$NAME %in% gr2.mc] <- "#41ab5d" #MIDDLE green "Developed"
-country_colors[wrld_simpl@data$NAME %in% gr3.mc] <- "#c7e9c0" #LEAST green   "Semi-Developed"
-country_colors[wrld_simpl@data$NAME %in% gr4.mc] <- "#fb590e" #orange "Not Crowded"
-country_colors[wrld_simpl@data$NAME %in% gr5.mc] <- "#006d2c" #MOST green  "Highly Developed"
+country_colors[wrld_simpl@data$NAME %in% gr4.mc] <- "#006d2c" #MOST green  "Highly Developed"
+country_colors[wrld_simpl@data$NAME %in% gr5.mc] <- "#80cdc1" #green "Income/Gender"
 country_colors[wrld_simpl@data$NAME %in% gr6.mc] <- "#fee08b" #yellow  "Unequal/Corrupted"
-# country_colors[wrld_simpl@data$NAME %in% gr7.mc] <- "#f1a340" #orange  "Urban Population/Phones"
 
 #Plot the map
 Cl_countries.mc <-  plot(wrld_simpl, col = country_colors) 
 Cl_countries.mc <- Cl_countries.mc + title(main=paste("Model Based Clustering"),cex=15) 
 Cl_countries.mc <- Cl_countries.mc <- legend(x=-180,y=15, inset=.09, title="",
-                                       c("Poor/Corrupted","Developed","Semi-Developed","Low population","Highly Developed","Unequal/Corrupted","Urban Population/Phones","NoData"), 
-                                       fill=c("#d53e4f","#41ab5d", "#c7e9c0", "#fb590e","#006d2c","#fee08b" ,"#f1a340", gray(.80)), 
+                                       c("Poor/Corrupted","Developing","Developed","Highly Developed","Income/Gender","Unequal/Corrupted","NoData"), 
+                                       fill=c("#d53e4f","#c7e9c0", "#41ab5d","#006d2c","#80cdc1","#fee08b", gray(.80)), 
                                        horiz=FALSE, cex=1.5, bg="transparent",bty = "n")
 
 
@@ -169,9 +158,6 @@ Cl_countries.mc <- Cl_countries.mc <- legend(x=-180,y=15, inset=.09, title="",
 
 ## Centroids to interprete the clusters
 round(t(mc$parameters[["mean"]]),3)
-
-#group 7
-#round(t(mc$parameters[["mean"]][,7]),3)
 
 
 #COMPARE
