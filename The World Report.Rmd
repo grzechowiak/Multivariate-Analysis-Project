@@ -59,7 +59,7 @@ library(scatterplot3d)
 # source('MDS.R')
 ```
 
-![Continents presented in 3D space](img/mds2_high_r.gif)
+![Continents presented in 3D space](img/mds.gif)
 
 
 
