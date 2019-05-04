@@ -6,7 +6,7 @@ d <- dist(data.s)
 cmd <- cmdscale(d, k=5, eig = T)
 cumsum(cmd$eig[1:5])/sum(cmd$eig[1:5]) 
 cmd <- cmdscale(d, k=3)
-#library(scatterplot3d)
+library(scatterplot3d)
 s3d <- scatterplot3d(cmd, pch=16, cex.axis = 1)
 s3d.coords <- s3d$xyz.convert(cmd)
 text(s3d.coords$x[141], s3d.coords$y[141],           # x and y coordinates
@@ -49,7 +49,7 @@ system(my_command)
 my_command <- 'rm *.png'
 system(my_command)
 
-#convert 3d.gif -density 50 -quality 50 mds2.gif
+#convert 3d.gif -fuzz 30% -layers Optimize result.gif
 
 
 #group by continent and apply MDS
