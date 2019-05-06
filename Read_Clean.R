@@ -11,7 +11,7 @@ Read_Clean <- function(data_input=NULL){
   
 
 ######## ######## ######## ######## ######## 
-########## READ ALL DATA AND MERGE ########## 
+############### READ ALL DATA  ############## 
 ######## ######## ######## ######## ######## 
 
 #Read data
