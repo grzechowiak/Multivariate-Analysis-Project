@@ -10,7 +10,7 @@ output:
 ---
 
 <br/>
-<br/>
+
 
 #I. Introduction:
 The report was done at Texas Tech University as a final project of Multivariate Analysis class. The dataset is used from Gapminder World, which contains data from several sources. The motivation is focused on comparing countries from the economical, social and government perspectives. 
@@ -18,7 +18,7 @@ The report was done at Texas Tech University as a final project of Multivariate 
 The aim of this post is to present the results of the analysis, while the complete Report can be found here [Github Link](https://github.com/grzechowiak/Multivariate-Analysis-Project/blob/master/FINAL%20REPORT/The%20World%20Report%20(MA%20Project).pdf). The file contains information about variables and their source as well describe the process of cleaning data. Furthermore, the visualizations presented here are interpreted in more detail in the Report.
 
 <br/>
-<br/>
+
 
 #II. Data cleaning
 The whole code for data loading, merging and cleaning is preseted in the function Read_Clean() [Github Link](https://github.com/grzechowiak/Multivariate-Analysis-Project/blob/master/Read_Clean.R)
@@ -34,7 +34,7 @@ cleaned <- Read_Clean()
 
 
 <br/>
-<br/>
+
 
 
 #III. Visualizations
@@ -154,11 +154,9 @@ Cl_countries <- clusters_countries(cleaned)
 <br/>
 
 # IV. Exploratory Factor Analysis (EFA)
-Exploratory Factor Analysis looks to link observable variables to unobservable variables via regression modeling. The discovery of the relationship(s) between variables without making any assumptions that such relationships may exist is crucial when defining what factors, and how many, may best describe the data.  
+Exploratory Factor Analysis looks to link observable variables to unobservable variables via regression modeling. The discovery of the relationship(s) between variables without making any assumptions that such relationships may exist is crucial when defining what factors, and how many, may best describe the data. Code for the graph: [Github Link](https://github.com/grzechowiak/Multivariate-Analysis-Project/blob/master/EFA.R)
 
 ```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
-  
-#PART 5: EFA
 source('EFA.R')
 EFA_loadings(cleaned)
 ```

@@ -1,5 +1,5 @@
 #What is inside:
-#The function receives cleaned data perform k-means & mode based
+#The function receives cleaned data perform k-means & model based
 #clustering between countries.
 
 clusters_countries <- function(data_input=NULL) {
@@ -28,7 +28,7 @@ plot.wgss = function(mydata, maxc) {
 }
 
 
-#Check # of cluster
+#Check # of clusters
 #scree_plot2 <- plot.wgss(clus_coun, 20)
 # Plots shows around 4-5 clausters
 

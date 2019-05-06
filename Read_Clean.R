@@ -2,8 +2,8 @@
 #What is inside:
 # The function, read all csv files and merge them together. Later a new column 
 # "continent" is created based on the column "country". After that data is cleaned 
-# by the function which insert median value for continent instead of NA.
-# At the end outliers are checked (boxplots, histograms, bivariate boxplots)
+# by the function which in place of NA inserts a median value based on the continent.
+# At the end outliers are checked using: boxplots, histograms, bivariate boxplots.
 
 Read_Clean <- function(data_input=NULL){
 

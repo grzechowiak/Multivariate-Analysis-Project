@@ -4,13 +4,13 @@
 
 cluster_continents <- function(data_input=NULL) {
 
+
 ########################################################
 #### COMPUTING THE DISTANCE BETWEEN CONTINENTS ####
 ########################################################
+  
 data_clus <-  cleaned
 data_clus <- data_clus[,-2] # delete country column
-#data_clus <- subset(data_clus, select=-c(country,pop_total,urban_pop_tot, Pop_Dens))
-
 
 #Take median for each continent for each column
 grouped_by_con <- aggregate(. ~ continent, data=data_clus, FUN=median)
@@ -41,11 +41,6 @@ cluster_plot <-  plot(as.phylo(hc), type = "cladogram", cex = 2,
 
 cutree(hc,3)
 
-#Scree plot support the idea of 3 clusters
-#We have 3 clusters in data:
-#1: Africa & Oceania
-#2: Asia & Central Ameica
-#3: South America, Europe, North America
 
 return()
 }

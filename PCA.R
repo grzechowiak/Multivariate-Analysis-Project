@@ -1,5 +1,7 @@
 #What is inside:
-#The function receives cleaned data and compute PCA. The result is PCA plot.
+#The function receives cleaned data and compute PCA. The result are plots:
+# PC1 and 2 , PC1 and 3, the map.
+
 
 PCA <- function(data_input=NULL) {
 
