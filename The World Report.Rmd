@@ -108,7 +108,7 @@ PrinCompPlot[2]
 **PCA on the World Map**  <br/>
 In order to show which countries are the highest in what Principal Component the World Map was presented. From each component (PC1, PC2, and PC3) top 15 countries with the highest loading in each group were chosen and plotted on the map.
 
-```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+```{r fig.height=8, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 PrinCompPlot <- PCA(cleaned)
 ```
 
@@ -156,7 +156,7 @@ Cl_countries <- clusters_countries(cleaned)
 # IV. Exploratory Factor Analysis (EFA)
 Exploratory Factor Analysis looks to link observable variables to unobservable variables via regression modeling. The discovery of the relationship(s) between variables without making any assumptions that such relationships may exist is crucial when defining what factors, and how many, may best describe the data. Code for the graph: [Github Link](https://github.com/grzechowiak/Multivariate-Analysis-Project/blob/master/EFA.R)
 
-```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+```{r fig.height=8, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 source('EFA.R')
 EFA_loadings(cleaned)
 ```
@@ -168,7 +168,7 @@ From the loadings the Factors were interpreted as follow: <br/>
 
 
 
-```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
+```{r fig.height=8, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
 source('EFA.R')
 groups = EFA_plot(cleaned)
 ```
