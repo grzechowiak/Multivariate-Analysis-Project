@@ -80,9 +80,7 @@ Interpretation of PC1, PC2, and PC3 are as follow:<br/>
 
 **Plot PC1 vs PC2** 
 
-```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
-PrinCompPlot[1]
-```
+![](img/PC12.png)
 
 - On the right side of the plot with a high value of PC1 high developed countries in Europe and North America can be spotted. Those countries are above the average in the context of Less corruption, Life expectancy, Internet access, number of phones and income.
 
@@ -94,9 +92,7 @@ PrinCompPlot[1]
 
 **Plot PC1 vs PC3** 
 
-```{r fig.height=10, fig.width=15, message=FALSE, warning=FALSE, dpi=300}
-PrinCompPlot[2]
-```
+![](img/PC13.png)
 
 - The second plot shows that very high inequality is presented especially in South America and Africa
 
